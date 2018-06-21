@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Header, PricingCard } from 'react-native-elements';
 import Plans from './Plans';
+import Premiums from './Premiums';
 
 export default class App extends React.Component {
   render() {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
                 centerComponent={{text: 'AT&T', color: '#fff', style: styles.header}}
             />
             <Plans/>
+            <Premiums/>
           </ScrollView>
         </View>
     );

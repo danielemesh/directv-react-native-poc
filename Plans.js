@@ -4,14 +4,6 @@ import { Button, PricingCard, Text } from 'react-native-elements';
 import theme from './theme';
 
 export default class Plans extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.lineup = this.lineup.bind(this);
-  }
-  lineup(arg) {
-    console.log(arg);
-  }
   render() {
     return (
         <View style={styles.container}>

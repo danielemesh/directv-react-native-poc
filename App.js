@@ -1,8 +1,10 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Header, PricingCard } from 'react-native-elements';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Header } from 'react-native-elements';
+
 import Plans from './Plans';
 import Premiums from './Premiums';
+import Dvr from './Dvr';
 
 export default class App extends React.Component {
   render() {
@@ -15,6 +17,7 @@ export default class App extends React.Component {
             />
             <Plans/>
             <Premiums/>
+            <Dvr />
           </ScrollView>
         </View>
     );
@@ -24,7 +27,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex           : 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems     : 'center',
     justifyContent : 'center'
   },

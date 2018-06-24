@@ -5,6 +5,8 @@ import { Header } from 'react-native-elements';
 import Plans from './Plans';
 import Premiums from './Premiums';
 import Dvr from './Dvr';
+import Cdvr from './Cdvr';
+import DirectvHeader from './DirectvHeader';
 
 export default class App extends React.Component {
   render() {
@@ -15,9 +17,11 @@ export default class App extends React.Component {
                 backgroundColor={'#1a1a1a'}
                 centerComponent={{text: 'AT&T', color: '#fff', style: styles.header}}
             />
+            {/*<DirectvHeader/>*/}
             <Plans/>
             <Premiums/>
-            <Dvr />
+            <Dvr/>
+            <Cdvr/>
           </ScrollView>
         </View>
     );

@@ -4,7 +4,12 @@ import { Button, PricingCard, Text } from 'react-native-elements';
 import theme from './theme';
 
 export default class Plans extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
+    const { changeSelection } = this.props;
     return (
         <View style={styles.container}>
           <View style={{marginBottom: 20}}>
@@ -13,7 +18,7 @@ export default class Plans extends React.Component {
           </View>
           <View>
             <Button
-                containerStyle={{margin: 0}}
+                containerViewStyle={{marginLeft: 0, marginRight: 0}}
                 buttonStyle={styles.button}
                 title={'Compare channel lineups'}
                 color={theme.primaryColor}
@@ -22,6 +27,7 @@ export default class Plans extends React.Component {
                 }}
             />
             <Button
+                containerViewStyle={{marginLeft: 0, marginRight: 0}}
                 buttonStyle={styles.button}
                 title={'Find your local and sports networks'}
                 color={theme.primaryColor}
@@ -38,6 +44,7 @@ export default class Plans extends React.Component {
                 price='$35/mo'
                 info={['60+ live channels']}
                 button={{title: 'Select Plan'}}
+                onButtonPress={() => changeSelection()}
             />
             <PricingCard
                 color={theme.primaryColor}
@@ -45,6 +52,7 @@ export default class Plans extends React.Component {
                 price='$50/mo'
                 info={['80+ live channels']}
                 button={{title: 'Select Plan'}}
+                onButtonPress={() => changeSelection()}
             />
             <PricingCard
                 color={theme.primaryColor}
@@ -52,6 +60,7 @@ export default class Plans extends React.Component {
                 price='$60/mo'
                 info={['100+ live channels']}
                 button={{title: 'Select Plan'}}
+                onButtonPress={() => changeSelection()}
             />
             <PricingCard
                 color={theme.primaryColor}
@@ -59,6 +68,7 @@ export default class Plans extends React.Component {
                 price='$70/mo'
                 info={['120+ live channels']}
                 button={{title: 'Select Plan'}}
+                onButtonPress={() => changeSelection()}
             />
           </ScrollView>
         </View>

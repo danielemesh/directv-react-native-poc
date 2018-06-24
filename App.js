@@ -7,8 +7,17 @@ import Premiums from './Premiums';
 import Dvr from './Dvr';
 import Cdvr from './Cdvr';
 import DirectvHeader from './DirectvHeader';
+import PlansSummary from './PlansSummary';
 
 export default class App extends React.Component {
+  state = {
+    isSelected: false
+  };
+  
+  changeSelection = () => {
+    this.setState({isSelected: !this.state.isSelected})
+  };
+  
   render() {
     return (
         <View style={styles.container}>
@@ -19,7 +28,11 @@ export default class App extends React.Component {
             />
             {/*<DirectvHeader/>*/}
             <View style={styles.mainContentContainer}>
-              <Plans/>
+              {this.state.isSelected ? (
+                  <PlansSummary changeSelection={this.changeSelection} />
+              ) : (
+                  <Plans changeSelection={this.changeSelection} />
+              )}
               <Premiums/>
               <Dvr/>
               <Cdvr/>

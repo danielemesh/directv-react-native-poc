@@ -18,10 +18,12 @@ export default class App extends React.Component {
                 centerComponent={{text: 'AT&T', color: '#fff', style: styles.header}}
             />
             {/*<DirectvHeader/>*/}
-            <Plans/>
-            <Premiums/>
-            <Dvr/>
-            <Cdvr/>
+            <View style={styles.mainContentContainer}>
+              <Plans/>
+              <Premiums/>
+              <Dvr/>
+              <Cdvr/>
+            </View>
           </ScrollView>
         </View>
     );
@@ -37,6 +39,9 @@ const styles = StyleSheet.create({
   },
   header: {
     color: '#fff'
+  },
+  mainContentContainer: {
+    flex: 1,
+    padding: 20,
   }
-  
 });

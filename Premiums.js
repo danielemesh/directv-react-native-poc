@@ -50,7 +50,7 @@ export default class Premiums extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <View style={{marginBottom: 20}}>
+          <View style={{marginBottom: 10}}>
             <Text h4>And even more for 5$/mo.!</Text>
           </View>
           
@@ -88,8 +88,8 @@ export default class Premiums extends React.Component {
 const styles = StyleSheet.create({
   container    : {
     flex        : 1,
-    paddingLeft : 10,
-    paddingRight: 10
+    marginTop: 20,
+    marginBottom: 20
   },
   cardContainer: {
     width         : 220,

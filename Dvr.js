@@ -32,10 +32,9 @@ export default class Dvr extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex           : 1,
-    margin         : 10,
     padding        : 20,
-    backgroundColor: '#fff',
-    //alignItems     : 'center',
-    //justifyContent : 'spasce-'
+    marginTop: 20,
+    marginBottom: 20,
+    backgroundColor: '#fff'
   }
 });

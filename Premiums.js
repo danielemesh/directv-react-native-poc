@@ -3,91 +3,102 @@ import { ScrollView, StyleSheet, View, Image, Dimensions } from 'react-native';
 import { Button, Card, Text } from 'react-native-elements';
 import theme from './theme';
 import PricePerMonth from './components/common/PricePerMonth';
+import { generateGuid } from './utils';
+import AddonCard from './AddonCard';
 
 export default class Premiums extends React.Component {
-  cards     = [
-    {
-      id: 1,
-      imgSrc: require('./assets/images/hbo-logo.png'),
-      content: [
-        'Game of Thrones',
-        'Insecure',
-        'Westworld'
-      ],
-      backgroundColor: 'linear-gradient(153deg, rgb(24, 55, 192), rgb(206, 73, 105))'
-    },
-    {
-      id: 2,
-      imgSrc: require('./assets/images/cinemax-logo.png'),
-      content: [
-        'The Knick',
-        'Banshee',
-        'Quarry'
-      ],
-      backgroundColor: 'linear-gradient(159deg, rgb(17, 38, 119), rgb(47, 145, 208))'
-    },
-    {
-      id: 3,
-      imgSrc: require('./assets/images/showtime-logo.png'),
-      content: [
-        'Dexter',
-        'Homeland',
-        'Penny Dreadful'
-      ],
-      backgroundColor: 'linear-gradient(159deg, rgb(24, 55, 192), rgb(43, 176, 119))'
-    },
-    {
-      id: 4,
-      imgSrc: require('./assets/images/starz-logo.png'),
-      content: [
-        'Power',
-        'American Gods',
-        'Counterpart'
-      ],
-      backgroundColor: 'linear-gradient(164deg, rgb(23, 55, 192), rgb(171, 27, 168))'
-    }
-  ];
-  lastIndex = this.cards.length - 1;
+  constructor(props) {
+    super(props);
+    
+    this.onSelectAddon = this.onSelectAddon.bind(this);
+    
+    this.state = {
+      addons: [
+        {
+          id: generateGuid(),
+          price: 5,
+          isSelected: false,
+          image: require('./assets/images/hbo-logo.png'),
+          featuredPrograms: [
+            'Game of Thrones',
+            'Insecure',
+            'Westworld'
+          ],
+          backgroundColor: 'linear-gradient(153deg, rgb(24, 55, 192), rgb(206, 73, 105))'
+        },
+        {
+          id: generateGuid(),
+          price: 5,
+          isSelected: false,
+          image: require('./assets/images/cinemax-logo.png'),
+          featuredPrograms: [
+            'The Knick',
+            'Banshee',
+            'Quarry'
+          ],
+          backgroundColor: 'linear-gradient(159deg, rgb(17, 38, 119), rgb(47, 145, 208))'
+        },
+        {
+          id: generateGuid(),
+          price: 8,
+          isSelected: false,
+          image: require('./assets/images/showtime-logo.png'),
+          featuredPrograms: [
+            'Dexter',
+            'Homeland',
+            'Penny Dreadful'
+          ],
+          backgroundColor: 'linear-gradient(159deg, rgb(24, 55, 192), rgb(43, 176, 119))'
+        },
+        {
+          id: generateGuid(),
+          price: 8,
+          isSelected: false,
+          image: require('./assets/images/starz-logo.png'),
+          featuredPrograms: [
+            'Power',
+            'American Gods',
+            'Counterpart'
+          ],
+          backgroundColor: 'linear-gradient(164deg, rgb(23, 55, 192), rgb(171, 27, 168))'
+        }
+      ]
+    };
+  }
+  
+  onSelectAddon(id) {
+    const addons = this.state.addons.map(addon => {
+      if (addon.id === id) {
+        addon.isSelected = !addon.isSelected;
+      }
+      
+      return addon;
+    });
+    
+    this.setState({addons});
+  }
   
   render() {
-    const {width: winWidth} = Dimensions.get('window');
+    const { width } = Dimensions.get('window');
     
     return (
         <View style={styles.container}>
           <View style={styles.titleContainer}>
-            <Text h4>And even more for 5$/mo.!</Text>
+            <Text h4>Add even more fun from $5/mo.!</Text>
           </View>
           
           <ScrollView horizontal>
-            {this.cards.map((card, index) => {
-              const isLast = index === this.lastIndex;
+            {this.state.addons.map((addon, index) => {
+              const isLast = index === this.state.addons.length - 1;
+              
               return (
-                  <Card
-                      key={`card_${card.id}`}
-                      containerStyle={[styles.cardContainer,
-                        {
-                          backgroundColor: card.backgroundColor,
-                          width: winWidth / 1.6
-                        },
-                        isLast ? {marginRight: 0} : {}]}
-                      wrapperStyle={styles.cardWrapper}>
-                    <Image source={card.imgSrc}
-                           style={styles.cardImage} resizeMode={'contain'}/>
-                    <View>
-                      {card.content.map((text, index) => (
-                          <Text key={`text_${index}`}
-                                style={styles.cardContent}>{text}</Text>
-                      ))}
-                    </View>
-                    <PricePerMonth price={5} size={30} color="#fff"/>
-                    <View>
-                      <Button
-                          backgroundColor='#fff'
-                          color={theme.primaryColor}
-                          buttonStyle={styles.button}
-                          title='Add'/>
-                    </View>
-                  </Card>
+                  <AddonCard
+                      key={addon.id}
+                      isSelected={addon.isSelected}
+                      onSelect={this.onSelectAddon}
+                      addon={addon}
+                      width={width / 1.6}
+                      containerStyle={isLast ? {marginRight: 0} : {}}/>
               );
             })}
           </ScrollView>
@@ -103,37 +114,14 @@ const styles = StyleSheet.create({
     marginBottom: theme.panelMarginHorizontal
   },
   titleContainer: {
-    marginBottom: 10,
+    marginBottom: theme.panelInnerMargin,
     marginLeft: theme.panelMarginHorizontal,
     marginRight: theme.panelMarginHorizontal
-  },
-  cardContainer: {
-    //width         : 220,
-    height: 350,
-    //margin        : 15,
-    margin: 0,
-    marginRight: 30,
-    borderWidth: 0,
-    padding: 15,
-    justifyContent: 'space-evenly'
-  },
-  cardWrapper: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'space-between'
-  },
-  cardImage: {
-    width: 100
   },
   button: {
     borderColor: theme.primaryColor,
     borderWidth: 2,
     borderRadius: 50,
     width: 150
-  },
-  cardContent: {
-    textAlign: 'center',
-    marginBottom: 5,
-    color: '#fff'
   }
 });

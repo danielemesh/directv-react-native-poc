@@ -9,32 +9,34 @@ export default class Plans extends React.Component {
   }
   
   render() {
-    const { changeSelection } = this.props;
+    const {changeSelection} = this.props;
     return (
         <View style={styles.container}>
-          <View style={{marginBottom: 20}}>
-            <Text h4>We’ve got you covered</Text>
-            <Text>Not sure which plan is for you?</Text>
-          </View>
-          <View>
-            <Button
-                containerViewStyle={{marginLeft: 0, marginRight: 0}}
-                buttonStyle={styles.button}
-                title={'Compare channel lineups'}
-                color={theme.primaryColor}
-                onPress={() => {
-                  Alert.alert('Compare Channels', 'Hi there!');
-                }}
-            />
-            <Button
-                containerViewStyle={{marginLeft: 0, marginRight: 0}}
-                buttonStyle={styles.button}
-                title={'Find your local and sports networks'}
-                color={theme.primaryColor}
-                onPress={() => {
-                  Alert.alert('Local & Sports', 'Hi there!');
-                }}
-            />
+          <View style={styles.headerContainer}>
+            <View style={{marginBottom: 20}}>
+              <Text h4>We’ve got you covered</Text>
+              <Text>Not sure which plan is for you?</Text>
+            </View>
+            <View>
+              <Button
+                  containerViewStyle={{marginLeft: 0, marginRight: 0}}
+                  buttonStyle={styles.button}
+                  title={'Compare channel lineups'}
+                  color={theme.primaryColor}
+                  onPress={() => {
+                    Alert.alert('Compare Channels', 'Hi there!');
+                  }}
+              />
+              <Button
+                  containerViewStyle={{marginLeft: 0, marginRight: 0}}
+                  buttonStyle={styles.button}
+                  title={'Find your local and sports networks'}
+                  color={theme.primaryColor}
+                  onPress={() => {
+                    Alert.alert('Local & Sports', 'Hi there!');
+                  }}
+              />
+            </View>
           </View>
           
           <ScrollView horizontal>
@@ -78,15 +80,20 @@ export default class Plans extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex        : 1,
-    marginTop: 20,
-    marginBottom: 20
+    flex: 1,
+    marginTop: theme.panelMarginHorizontal,
+    marginBottom: theme.panelMarginHorizontal
   },
-  button   : {
-    marginBottom   : 20,
+  headerContainer: {
+    marginBottom: 20,
+    paddingLeft: theme.panelInnerPadding,
+    paddingRight: theme.panelInnerPadding
+  },
+  button: {
+    marginBottom: 20,
     backgroundColor: 'transparent',
-    borderColor    : theme.primaryColor,
-    borderWidth    : 2,
-    borderRadius   : 20
+    borderColor: theme.primaryColor,
+    borderWidth: 2,
+    borderRadius: 20
   }
 });

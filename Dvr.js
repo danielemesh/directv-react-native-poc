@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
+import theme from './theme';
 
 export default class Dvr extends React.Component {
   render() {
@@ -13,7 +14,8 @@ export default class Dvr extends React.Component {
           <View>
             <Text style={{fontSize: 18, paddingBottom: 20}}>
               Included! Skip through commercials on a whim. Record up to 20
-              hours — no bulky cable box required. Save recordings up to 30 days.
+              hours — no bulky cable box required. Save recordings up to 30
+              days.
             </Text>
           </View>
           <View>
@@ -31,10 +33,12 @@ export default class Dvr extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex           : 1,
-    padding        : 20,
-    marginTop: 20,
-    marginBottom: 20,
+    flex: 1,
+    padding: 20,
+    marginLeft: theme.mainContentPadding,
+    marginRight: theme.mainContentPadding,
+    marginTop: theme.panelMarginHorizontal,
+    marginBottom: theme.panelMarginHorizontal,
     backgroundColor: '#fff'
   }
 });

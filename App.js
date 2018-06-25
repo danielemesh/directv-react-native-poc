@@ -8,6 +8,7 @@ import Dvr from './Dvr';
 import Cdvr from './Cdvr';
 import DirectvHeader from './DirectvHeader';
 import PlansSummary from './PlansSummary';
+import StreamingDevices from './StreamingDevices';
 
 export default class App extends React.Component {
   state = {
@@ -15,7 +16,7 @@ export default class App extends React.Component {
   };
   
   changeSelection = () => {
-    this.setState({isSelected: !this.state.isSelected})
+    this.setState({isSelected: !this.state.isSelected});
   };
   
   render() {
@@ -24,18 +25,23 @@ export default class App extends React.Component {
           <ScrollView>
             <Header
                 backgroundColor={'#1a1a1a'}
-                centerComponent={{text: 'AT&T', color: '#fff', style: styles.header}}
+                centerComponent={{
+                  text: 'AT&T',
+                  color: '#fff',
+                  style: styles.header
+                }}
             />
             {/*<DirectvHeader/>*/}
             <View style={styles.mainContentContainer}>
               {this.state.isSelected ? (
-                  <PlansSummary changeSelection={this.changeSelection} />
+                  <PlansSummary changeSelection={this.changeSelection}/>
               ) : (
-                  <Plans changeSelection={this.changeSelection} />
+                  <Plans changeSelection={this.changeSelection}/>
               )}
               <Premiums/>
               <Dvr/>
               <Cdvr/>
+              <StreamingDevices/>
             </View>
           </ScrollView>
         </View>
@@ -45,16 +51,15 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex           : 1,
+    flex: 1,
     backgroundColor: '#eee',
-    alignItems     : 'center',
-    justifyContent : 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   header: {
     color: '#fff'
   },
   mainContentContainer: {
-    flex: 1,
-    padding: 20,
+    flex: 1
   }
 });

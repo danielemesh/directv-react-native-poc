@@ -10,24 +10,29 @@ export default class PlansSummary extends React.Component {
   }
   
   render() {
-    const { changeSelection } = this.props;
+    const {changeSelection} = this.props;
     return (
         <View style={styles.container}>
-          <Icon type="font-awesome" name="tv" size={40} raised color={theme.primaryColor} reverse/>
+          <Icon type="font-awesome" name="tv" size={40} raised
+                color={theme.primaryColor} reverse/>
           <View style={styles.summary}>
             <View>
               <Text h4>DIRECTV NOW</Text>
               <Text>JUST RIGHT - 80+ live channels</Text>
             </View>
             <View>
-              <PricePerMonth price={50} size={30} />
+              <PricePerMonth price={50} size={30}/>
             </View>
           </View>
           <Button title="Change"
                   onPress={() => changeSelection()}
                   color={theme.primaryColor}
                   backgroundColor="transparent"
-                  containerViewStyle={{marginLeft: 0, marginRight: 0, alignSelf: 'flex-start'}} />
+                  containerViewStyle={{
+                    marginLeft: 0,
+                    marginRight: 0,
+                    alignSelf: 'flex-start'
+                  }}/>
         </View>
     );
   }
@@ -36,7 +41,7 @@ export default class PlansSummary extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    padding: 20
+    padding: theme.panelInnerPadding
   },
   summary: {
     flexDirection: 'row',

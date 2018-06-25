@@ -4,12 +4,14 @@ import { Button, PricingCard, Text } from 'react-native-elements';
 import theme from './theme';
 import PlanCard from './PlanCard';
 import { generateGuid } from './utils';
+import PlansSummary from './PlansSummary';
 
 export default class Plans extends React.Component {
   constructor(props) {
     super(props);
     
     this.onSelectPlan = this.onSelectPlan.bind(this);
+    this.onPlanChange = this.onPlanChange.bind(this);
     
     this.state = {
       isSummaryView: false,
@@ -45,11 +47,27 @@ export default class Plans extends React.Component {
   }
   
   onSelectPlan(id) {
-    this.setState({selectedPlanId: id});
+    const currentSelectedPlanId = this.state.selectedPlanId;
+    
+    if (currentSelectedPlanId === id) {
+      this.setState({selectedPlanId: '', isSummaryView: false});
+    }
+    else {
+      this.setState({selectedPlanId: id, isSummaryView: true});
+    }
+  }
+  
+  onPlanChange() {
+    this.setState({isSummaryView: false});
   }
   
   render() {
     const {width} = Dimensions.get('window');
+    if (this.state.isSummaryView) {
+      const selectedPlan = this.state.plans.find(p => p.id === this.state.selectedPlanId);
+      
+      return <PlansSummary data={selectedPlan} onChangeHandler={this.onPlanChange}/>
+    }
     
     return (
         <View style={styles.container}>

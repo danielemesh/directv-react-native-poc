@@ -1,23 +1,15 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Header, Text } from 'react-native-elements';
+import { Header } from 'react-native-elements';
 
 import Plans from './Plans';
 import Premiums from './Premiums';
 import Dvr from './Dvr';
 import Cdvr from './Cdvr';
-import PlansSummary from './PlansSummary';
 import StreamingDevices from './StreamingDevices';
+import StickyFooter from './StickyFooter';
 
 export default class App extends React.Component {
-  state = {
-    isSelected: false
-  };
-  
-  changeSelection = () => {
-    this.setState({isSelected: !this.state.isSelected});
-  };
-  
   render() {
     return (
         <View style={styles.container}>
@@ -31,17 +23,14 @@ export default class App extends React.Component {
                 }}
             />
             <View style={styles.mainContentContainer}>
-              {this.state.isSelected ? (
-                  <PlansSummary changeSelection={this.changeSelection}/>
-              ) : (
-                  <Plans changeSelection={this.changeSelection}/>
-              )}
+              <Plans />
               <Premiums/>
               <Dvr/>
               <Cdvr/>
               <StreamingDevices/>
             </View>
           </ScrollView>
+          <StickyFooter />
         </View>
     );
   }

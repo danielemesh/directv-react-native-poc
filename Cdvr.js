@@ -40,6 +40,7 @@ export default class Cdvr extends React.Component {
                     textStyle={{fontSize: 10}}
                     checkedColor={theme.primaryColor}
                     checked={this.state.selected === 'included'}
+                    onPress={() => this.onChange('included')}
                 />
                 <View style={{flex: 1}}>
                   <Text style={styles.label}>
@@ -67,6 +68,7 @@ export default class Cdvr extends React.Component {
                     textStyle={{fontSize: 10}}
                     checkedColor={theme.primaryColor}
                     checked={this.state.selected === 'upgrade'}
+                    onPress={() => this.onChange('upgrade')}
                 />
                 <View style={{flex: 1}}>
                   <Text

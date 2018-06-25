@@ -6,7 +6,6 @@ import Plans from './Plans';
 import Premiums from './Premiums';
 import Dvr from './Dvr';
 import Cdvr from './Cdvr';
-import DirectvHeader from './DirectvHeader';
 import PlansSummary from './PlansSummary';
 import StreamingDevices from './StreamingDevices';
 
@@ -31,7 +30,6 @@ export default class App extends React.Component {
                   style: styles.header
                 }}
             />
-            {/*<DirectvHeader/>*/}
             <View style={styles.mainContentContainer}>
               {this.state.isSelected ? (
                   <PlansSummary changeSelection={this.changeSelection}/>

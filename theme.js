@@ -8,5 +8,10 @@ export default theme = {
   // Panels
   panelMarginHorizontal: 20,
   panelInnerPadding: 20,
-  panelBgColor: '#fff'
+  panelInnerMargin: 20,
+  panelBgColor: '#fff',
+  
+  // Card
+  cardPadding: 15, // from react-native-elements <Card />
+  cardMarginRight: 30,
 };

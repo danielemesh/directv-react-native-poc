@@ -1,19 +1,60 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Alert } from 'react-native';
+import { ScrollView, StyleSheet, View, Alert, Dimensions } from 'react-native';
 import { Button, PricingCard, Text } from 'react-native-elements';
 import theme from './theme';
+import PlanCard from './PlanCard';
+import { generateGuid } from './utils';
 
 export default class Plans extends React.Component {
   constructor(props) {
     super(props);
+    
+    this.onSelectPlan = this.onSelectPlan.bind(this);
+    
+    this.state = {
+      isSummaryView: false,
+      selectedPlanId: '',
+      plans: [
+        {
+          id: generateGuid(),
+          name: 'LIVE A LITTLE',
+          details: '60+ live channels',
+          image: require('./assets/images/logos-live-a-little.png'),
+          price: 35
+        }, {
+          id: generateGuid(),
+          name: 'JUST RIGHT',
+          details: '80+ live channels',
+          image: require('./assets/images/logos-just-right.png'),
+          price: 50
+        }, {
+          id: generateGuid(),
+          name: 'GO BIG',
+          details: '100+ live channels',
+          image: require('./assets/images/logos-go-big.png'),
+          price: 60
+        }, {
+          id: generateGuid(),
+          name: 'GOTTA HAVE IT',
+          details: '120+ live channels',
+          image: require('./assets/images/logos-gotta-have-it.png'),
+          price: 70
+        }
+      ]
+    };
+  }
+  
+  onSelectPlan(id) {
+    this.setState({selectedPlanId: id});
   }
   
   render() {
-    const {changeSelection} = this.props;
+    const {width} = Dimensions.get('window');
+    
     return (
         <View style={styles.container}>
           <View style={styles.headerContainer}>
-            <View style={{marginBottom: 20}}>
+            <View style={{marginBottom: theme.panelInnerMargin}}>
               <Text h4>We’ve got you covered</Text>
               <Text>Not sure which plan is for you?</Text>
             </View>
@@ -40,38 +81,19 @@ export default class Plans extends React.Component {
           </View>
           
           <ScrollView horizontal>
-            <PricingCard
-                color={theme.primaryColor}
-                title='Live a Little'
-                price='$35/mo'
-                info={['60+ live channels']}
-                button={{title: 'Select Plan'}}
-                onButtonPress={() => changeSelection()}
-            />
-            <PricingCard
-                color={theme.primaryColor}
-                title='Just Right'
-                price='$50/mo'
-                info={['80+ live channels']}
-                button={{title: 'Select Plan'}}
-                onButtonPress={() => changeSelection()}
-            />
-            <PricingCard
-                color={theme.primaryColor}
-                title='Go Big'
-                price='$60/mo'
-                info={['100+ live channels']}
-                button={{title: 'Select Plan'}}
-                onButtonPress={() => changeSelection()}
-            />
-            <PricingCard
-                color={theme.primaryColor}
-                title='Gotta Have It'
-                price='$70/mo'
-                info={['120+ live channels']}
-                button={{title: 'Select Plan'}}
-                onButtonPress={() => changeSelection()}
-            />
+            {this.state.plans.map((plan, index) => {
+              const isLast = index === this.state.plans.length - 1;
+              return (
+                  <PlanCard
+                      key={plan.id}
+                      isSelected={this.state.selectedPlanId === plan.id}
+                      onSelect={this.onSelectPlan}
+                      plan={plan}
+                      width={width / 1.6}
+                      containerStyle={isLast ? {marginRight: 0} : {}}
+                  />
+              );
+            })}
           </ScrollView>
         </View>
     );
@@ -85,7 +107,7 @@ const styles = StyleSheet.create({
     marginBottom: theme.panelMarginHorizontal
   },
   headerContainer: {
-    marginBottom: 20,
+    marginBottom: theme.panelInnerMargin,
     paddingLeft: theme.panelInnerPadding,
     paddingRight: theme.panelInnerPadding
   },

@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Icon, Text } from 'react-native-elements';
 
-export default PricePerMonth = ({price, size, color}) => {
+export default PricePerMonth = ({price, size, color, containerViewStyle}) => {
   return (
-      <View style={styles.container}>
+      <View style={[styles.container, containerViewStyle]}>
         <Icon type="font-awesome"
               name="usd"
               color={color || '#1a1a1a'}
@@ -26,14 +26,11 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignSelf: 'flex-start'
-    //paddingTop: size / 3
   },
   price: {
-    //fontSize: size,
     fontWeight: 'bold'
   },
   month: {
-    //fontSize: size / 2,
     fontWeight: 'normal'
   }
 });

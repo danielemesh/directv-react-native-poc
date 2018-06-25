@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Header } from 'react-native-elements';
+import { Header, Text } from 'react-native-elements';
 
 import Plans from './Plans';
 import Premiums from './Premiums';

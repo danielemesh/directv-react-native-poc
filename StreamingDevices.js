@@ -4,10 +4,42 @@ import { Button, Card, Text } from 'react-native-elements';
 
 import theme from './theme';
 import PricePerMonth from './components/common/PricePerMonth';
+import StreamingDeviceCard from './StreamDeviceCard';
+import { generateGuid } from './utils';
 
 export default class StreamingDevices extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.onSelectDevice = this.onSelectDevice.bind(this);
+    
+    this.state = {
+      devices: [
+        {
+          id: generateGuid(),
+          name: 'Apple TV 4K',
+          image: require('./assets/images/apple-tv.png'),
+          price: 0,
+          details: 'When you prepay 3 months',
+        },
+        {
+          id: generateGuid(),
+          name: 'Roku Streaming Stick',
+          image: require('./assets/images/roku.png'),
+          price: 0,
+          details: 'When you prepay 1 months',
+        }
+      ],
+      selectedDeviceId: ''
+    };
+  }
+  
+  onSelectDevice(id) {
+    this.setState({selectedDeviceId: id});
+  }
   
   render() {
+    const {width} = Dimensions.get('window');
     return (
         <View style={styles.container}>
           <View style={styles.panelHeader}>
@@ -17,43 +49,23 @@ export default class StreamingDevices extends React.Component {
           </View>
           
           <ScrollView horizontal>
-            <StreamingDeviceCard/>
-            <StreamingDeviceCard/>
+            {this.state.devices.map((device, index) => {
+              const isLast = index === this.state.devices.length - 1;
+              return (
+                  <StreamingDeviceCard
+                      key={device.id}
+                      data={device}
+                      isSelected={this.state.selectedDeviceId === device.id}
+                      onSelect={this.onSelectDevice}
+                      width={width / 1.6}
+                      containerStyle={isLast ? {marginRight: 0} : {}}/>
+              )
+            })}
           </ScrollView>
         </View>
     );
   }
 }
-
-const StreamingDeviceCard = (props) => {
-  const {width} = Dimensions.get('window');
-  const cardWidth = width / 1.6;
-  
-  return (
-      <Card containerStyle={{
-        width: cardWidth,
-        borderWidth: 0,
-        marginLeft: 0,
-        marginRight: 30
-      }}>
-        <Text h4>title</Text>
-        <Image source={require('./assets/images/apple-tv.png')}
-               resizeMode="contain" style={{width: 150, alignSelf: 'center'}}/>
-        <PricePerMonth price={0} size={40}/>
-        <View>
-          <Text>When you prepay 3 months</Text>
-          <Button title="Shipping and offer details"
-                  color={theme.primaryColor}
-                  backgroundColor="transparent"
-                  containerViewStyle={{
-                    marginLeft: 0,
-                    marginRight: 0,
-                    alignSelf: 'flex-start'
-                  }}/>
-        </View>
-      </Card>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -64,6 +76,6 @@ const styles = StyleSheet.create({
   panelHeader: {
     marginBottom: 20,
     paddingLeft: theme.mainContentPadding,
-    paddingRight: theme.mainContentPadding,
+    paddingRight: theme.mainContentPadding
   }
 });

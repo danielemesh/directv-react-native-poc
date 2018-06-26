@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Image, Dimensions } from 'react-native';
 import { Button, Card, Text } from 'react-native-elements';
-import theme from './theme';
-import PricePerMonth from './components/common/PricePerMonth';
-import { generateGuid } from './utils';
+import theme from '../../theme';
+import PricePerMonth from '../../components/common/PricePerMonth';
+import { generateGuid } from '../../utils';
 import AddonCard from './AddonCard';
 
 export default class Premiums extends React.Component {
@@ -18,7 +18,7 @@ export default class Premiums extends React.Component {
           id: generateGuid(),
           price: 5,
           isSelected: false,
-          image: require('./assets/images/hbo-logo.png'),
+          image: require('../../assets/images/hbo-logo.png'),
           featuredPrograms: [
             'Game of Thrones',
             'Insecure',
@@ -30,7 +30,7 @@ export default class Premiums extends React.Component {
           id: generateGuid(),
           price: 5,
           isSelected: false,
-          image: require('./assets/images/cinemax-logo.png'),
+          image: require('../../assets/images/cinemax-logo.png'),
           featuredPrograms: [
             'The Knick',
             'Banshee',
@@ -42,7 +42,7 @@ export default class Premiums extends React.Component {
           id: generateGuid(),
           price: 8,
           isSelected: false,
-          image: require('./assets/images/showtime-logo.png'),
+          image: require('../../assets/images/showtime-logo.png'),
           featuredPrograms: [
             'Dexter',
             'Homeland',
@@ -54,7 +54,7 @@ export default class Premiums extends React.Component {
           id: generateGuid(),
           price: 8,
           isSelected: false,
-          image: require('./assets/images/starz-logo.png'),
+          image: require('../../assets/images/starz-logo.png'),
           featuredPrograms: [
             'Power',
             'American Gods',

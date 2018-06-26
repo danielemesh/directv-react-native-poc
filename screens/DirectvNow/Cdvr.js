@@ -1,9 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet, View, TouchableWithoutFeedback, TouchableHighlight, TouchableNativeFeedback } from 'react-native';
+import { Image, StyleSheet, View, TouchableNativeFeedback } from 'react-native';
 import { Badge, CheckBox, Text } from 'react-native-elements';
 
-import theme from './theme';
-import PricePerMonth from './components/common/PricePerMonth';
+import theme from '../../theme';
+import PricePerMonth from '../../components/common/PricePerMonth';
 
 export default class Cdvr extends React.Component {
   state = {
@@ -20,7 +20,7 @@ export default class Cdvr extends React.Component {
           <View style={{alignItems: 'center'}}>
             <Image resizeMode="contain"
                    style={{width: 260, height: 141}}
-                   source={require('./assets/images/IMG_stream.png')}/>
+                   source={require('../../assets/images/IMG_stream.png')}/>
           </View>
           <View>
             <Text h4 style={styles.panelTitle}>

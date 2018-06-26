@@ -6,7 +6,7 @@ export default class DirectvHeader extends React.Component {
     return (
         <View>
           <Image style={{flex: 1}}
-                 source={require('./assets/images/header-bg.jpg')}
+                 source={require('../../assets/images/header-bg.jpg')}
                  resizeMode="contain"/>
         </View>
     );

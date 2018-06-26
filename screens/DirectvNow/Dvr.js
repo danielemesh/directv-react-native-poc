@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
-import theme from './theme';
+import theme from '../../theme';
 
 export default class Dvr extends React.Component {
   render() {

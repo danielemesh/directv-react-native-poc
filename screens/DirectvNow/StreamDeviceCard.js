@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-elements';
-import PricePerMonth from './components/common/PricePerMonth';
-import theme from './theme';
+import PricePerMonth from '../../components/common/PricePerMonth';
+import theme from '../../theme';
 
 export default StreamingDeviceCard = ({width, data, containerStyle, isSelected, onSelect}) => {
   return (

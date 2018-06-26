@@ -2,10 +2,10 @@ import React from 'react';
 import { Image, StyleSheet, View, Dimensions, ScrollView } from 'react-native';
 import { Button, Card, Text } from 'react-native-elements';
 
-import theme from './theme';
-import PricePerMonth from './components/common/PricePerMonth';
+import theme from '../../theme';
+import PricePerMonth from '../../components/common/PricePerMonth';
 import StreamingDeviceCard from './StreamDeviceCard';
-import { generateGuid } from './utils';
+import { generateGuid } from '../../utils';
 
 export default class StreamingDevices extends React.Component {
   constructor(props) {
@@ -18,14 +18,14 @@ export default class StreamingDevices extends React.Component {
         {
           id: generateGuid(),
           name: 'Apple TV 4K',
-          image: require('./assets/images/apple-tv.png'),
+          image: require('../../assets/images/apple-tv.png'),
           price: 0,
           details: 'When you prepay 3 months',
         },
         {
           id: generateGuid(),
           name: 'Roku Streaming Stick',
-          image: require('./assets/images/roku.png'),
+          image: require('../../assets/images/roku.png'),
           price: 0,
           details: 'When you prepay 1 months',
         }

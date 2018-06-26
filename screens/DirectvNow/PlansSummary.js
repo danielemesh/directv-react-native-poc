@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import theme from './theme';
+import theme from '../../theme';
 import { Button, Icon, Text } from 'react-native-elements';
-import PricePerMonth from './components/common/PricePerMonth';
+import PricePerMonth from '../../components/common/PricePerMonth';
 
 export default PlansSummary = ({data, onChangeHandler}) => {
   return (

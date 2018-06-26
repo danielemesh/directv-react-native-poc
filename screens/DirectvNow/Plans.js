@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Alert, Dimensions } from 'react-native';
-import { Button, PricingCard, Text } from 'react-native-elements';
-import theme from './theme';
+import { Button, Text } from 'react-native-elements';
+import theme from '../../theme';
 import PlanCard from './PlanCard';
-import { generateGuid } from './utils';
+import { generateGuid } from '../../utils';
 import PlansSummary from './PlansSummary';
 
 export default class Plans extends React.Component {
@@ -21,25 +21,25 @@ export default class Plans extends React.Component {
           id: generateGuid(),
           name: 'LIVE A LITTLE',
           details: '60+ live channels',
-          image: require('./assets/images/logos-live-a-little.png'),
+          image: require('../../assets/images/logos-live-a-little.png'),
           price: 35
         }, {
           id: generateGuid(),
           name: 'JUST RIGHT',
           details: '80+ live channels',
-          image: require('./assets/images/logos-just-right.png'),
+          image: require('../../assets/images/logos-just-right.png'),
           price: 50
         }, {
           id: generateGuid(),
           name: 'GO BIG',
           details: '100+ live channels',
-          image: require('./assets/images/logos-go-big.png'),
+          image: require('../../assets/images/logos-go-big.png'),
           price: 60
         }, {
           id: generateGuid(),
           name: 'GOTTA HAVE IT',
           details: '120+ live channels',
-          image: require('./assets/images/logos-gotta-have-it.png'),
+          image: require('../../assets/images/logos-gotta-have-it.png'),
           price: 70
         }
       ]

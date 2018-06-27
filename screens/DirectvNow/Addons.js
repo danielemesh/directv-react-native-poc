@@ -2,11 +2,10 @@ import React from 'react';
 import { ScrollView, StyleSheet, View, Image, Dimensions } from 'react-native';
 import { Button, Card, Text } from 'react-native-elements';
 import theme from '../../theme';
-import PricePerMonth from '../../components/common/PricePerMonth';
 import { generateGuid } from '../../utils';
 import AddonCard from './AddonCard';
 
-export default class Premiums extends React.Component {
+export default class Addons extends React.Component {
   constructor(props) {
     super(props);
     
@@ -79,7 +78,7 @@ export default class Premiums extends React.Component {
   }
   
   render() {
-    const { width } = Dimensions.get('window');
+    const {width} = Dimensions.get('window');
     
     return (
         <View style={styles.container}>

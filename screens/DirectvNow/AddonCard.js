@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-elements';
-import PricePerMonth from '../../components/common/PricePerMonth';
+import PricePerMonth from '../../components/PricePerMonth';
 import theme from '../../theme';
 
 export default AddonCard = ({width, addon, containerStyle, onSelect}) => {

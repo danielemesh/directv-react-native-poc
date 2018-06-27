@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import StickyFooter from './StickyFooter';
 import DirectvNow from './screens/DirectvNow/DirectvNow';
-import MainHeader from './components/common/MainHeader';
+import MainHeader from './components/MainHeader';
 import Cart from './screens/Cart/Cart';
 import store from './redux/store';
 import { fetchProducts } from './redux/actions/products';

@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, TouchableNativeFeedback } from 'react-native';
 import { Badge, CheckBox, Text } from 'react-native-elements';
 
 import theme from '../../theme';
-import PricePerMonth from '../../components/common/PricePerMonth';
+import PricePerMonth from '../../components/PricePerMonth';
 
 export default class Cdvr extends React.Component {
   state = {

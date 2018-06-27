@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Dimensions, ScrollView } from 'react-native';
 import { Button, Card, Text } from 'react-native-elements';
 
 import theme from '../../theme';
-import PricePerMonth from '../../components/common/PricePerMonth';
+import PricePerMonth from '../../components/PricePerMonth';
 import StreamingDeviceCard from './StreamDeviceCard';
 import { generateGuid } from '../../utils';
 

@@ -11,9 +11,9 @@ export default PlanCard = ({width, plan, containerStyle, isSelected, onSelect}) 
       >
         <View style={styles.header}>
           <Text style={styles.name}>{plan.name}</Text>
-          <Text h4>{plan.details}</Text>
+          <Text h4>{plan.numberOfChannels}</Text>
         </View>
-        <Image source={plan.image}
+        <Image source={{uri: plan.image}}
                resizeMode="contain"
                style={{width: width - (theme.cardPadding * 2), height: 50}}
         />

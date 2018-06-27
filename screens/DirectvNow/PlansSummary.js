@@ -12,7 +12,7 @@ export default PlansSummary = ({data, onChangeHandler}) => {
         <View style={styles.summary}>
           <View>
             <Text h4>DIRECTV NOW</Text>
-            <Text>{`${data.name} - ${data.details}`}</Text>
+            <Text>{`${data.name} - ${data.numberOfChannels}`}</Text>
           </View>
           <View>
             <PricePerMonth price={data.price} size={30}/>

@@ -8,6 +8,7 @@ import DirectvNow from './screens/DirectvNow/DirectvNow';
 import MainHeader from './components/common/MainHeader';
 import Cart from './screens/Cart/Cart';
 import store from './redux/store';
+import { fetchProducts } from './redux/actions/products';
 
 export default class App extends React.Component {
   state = {
@@ -15,10 +16,7 @@ export default class App extends React.Component {
   };
   
   componentDidMount() {
-    setTimeout(() => {
-      console.log('dispatch');
-      store.dispatch({type: 'INC_PRICE', payload: {price: 5}});
-    }, 3000);
+    store.dispatch(fetchProducts());
   }
   
   render() {

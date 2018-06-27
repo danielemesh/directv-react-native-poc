@@ -9,28 +9,21 @@ const initialState = {
 };
 
 // Base Plans Reducer
-//const basePlansReducer = (state = [], action) => {
-//  const {type, payload} = action;
-//
-//  switch (type) {
-//    case AT.SELECT_BASE_PLAN:
-//      return state.map(plan => {
-//        if (plan.id === payload.id) {
-//          return {...plan, isSelected: true};
-//        }
-//        return plan;
-//      });
-//    case AT.REMOVE_BASE_PLAN:
-//      return state.map(plan => {
-//        if (plan.id === payload.id) {
-//          return {...plan, isSelected: false};
-//        }
-//        return plan;
-//      });
-//    default:
-//      return state;
-//  }
-//};
+const addonsReducer = (state = [], action) => {
+  const {type, payload} = action;
+  
+  switch (type) {
+    case AT.SELECT_ADDON:
+      return state.map(addon => {
+        if (addon.id === payload.id) {
+          return {...addon, isSelected: !addon.isSelected};
+        }
+        return addon;
+      });
+    default:
+      return state;
+  }
+};
 
 const productsReducer = (state = initialState, action) => {
   const {type, payload} = action;
@@ -52,6 +45,11 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedBasePlanId: ''
+      };
+    case AT.SELECT_ADDON:
+      return {
+        ...state,
+        addons: [...addonsReducer(state.addons, action)]
       };
     default:
       return state;

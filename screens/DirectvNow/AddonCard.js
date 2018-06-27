@@ -14,14 +14,14 @@ export default AddonCard = ({width, addon, containerStyle, onSelect}) => {
             containerStyle]}
           wrapperStyle={styles.cardWrapper}
       >
-        <Image source={addon.image}
+        <Image source={{uri: addon.image}}
                resizeMode={'contain'}
                style={[
                  styles.image,
                  {width: width - (theme.cardPadding * 2)}]}/>
         <View style={{marginBottom: 20}}>
           {addon.featuredPrograms.map((text, i) => (
-              <Text key={`text_${i}`}
+              <Text key={i}
                     style={styles.cardContent}>{text}</Text>
           ))}
         </View>
@@ -35,7 +35,10 @@ export default AddonCard = ({width, addon, containerStyle, onSelect}) => {
                   backgroundColor={addon.isSelected ? 'transparent' : '#fff'}
                   color={addon.isSelected ? '#fff' : theme.primaryColor}
                   borderRadius={20}
-                  buttonStyle={{borderWidth: 2, borderColor: addon.isSelected ? '#fff' : theme.primaryColor}}
+                  buttonStyle={{
+                    borderWidth: 2,
+                    borderColor: addon.isSelected ? '#fff' : theme.primaryColor
+                  }}
                   containerViewStyle={{marginLeft: 0, marginRight: 0}}
                   onPress={() => onSelect(addon.id)}
           />
@@ -48,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 0,
     marginLeft: 0,
-    marginRight: theme.cardMarginRight,
+    marginRight: theme.cardMarginRight
   },
   cardWrapper: {
     flex: 1,

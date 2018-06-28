@@ -9,14 +9,14 @@ export const fetchProductsSuccess = (products) => ({
   payload: products
 });
 
-export const selectBasePlan = (id) => ({
+export const selectBasePlan = (product) => ({
   type: AT.SELECT_BASE_PLAN,
-  payload: {id}
+  payload: {product}
 });
 
-export const removeBasePlan = (id) => ({
+export const removeBasePlan = (product) => ({
   type: AT.REMOVE_BASE_PLAN,
-  payload: {id}
+  payload: {product}
 });
 
 export const changeBasePlan = () => ({

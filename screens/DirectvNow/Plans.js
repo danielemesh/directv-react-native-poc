@@ -17,10 +17,24 @@ class Plans extends React.Component {
     this.onBasePlanChange = this.onBasePlanChange.bind(this);
   }
   
-  onSelectBasePlan(id) {
-    this.props.selectedBasePlanId === id
-        ? this.props.removeBasePlan(id)
-        : this.props.selectBasePlan(id);
+  onSelectBasePlan(product) {
+    const { selectedBasePlanId } = this.props;
+    
+    // Remove current
+    if (selectedBasePlanId === product.id) {
+      this.props.removeBasePlan(product);
+    }
+    // Remove current and select new
+    else if (selectedBasePlanId !== '') {
+      const selectedPlan = this.props.basePlans.find(p => p.id === selectedBasePlanId);
+      
+      this.props.removeBasePlan(selectedPlan);
+      this.props.selectBasePlan(product);
+    }
+    // Select new plan
+    else {
+      this.props.selectBasePlan(product);
+    }
   }
   
   onBasePlanChange() {
@@ -97,8 +111,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  selectBasePlan: (id) => dispatch(selectBasePlan(id)),
-  removeBasePlan: (id) => dispatch(removeBasePlan(id)),
+  selectBasePlan: (product) => dispatch(selectBasePlan(product)),
+  removeBasePlan: (product) => dispatch(removeBasePlan(product)),
   changeBasePlan: () => dispatch(changeBasePlan())
 });
 

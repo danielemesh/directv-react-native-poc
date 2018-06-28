@@ -16,16 +16,32 @@ const cartReducer = (state = initialState, action) => {
     case AT.SELECT_BASE_PLAN:
       return {
         ...state,
-        products: [
-          ...state.products,
-          payload
-        ],
-        dueMonthly: state.dueMonthly + payload.price,
-        totalAmount: state.totalAmount + payload.price
+        products: [...addProductToCart(state.products, payload.product)],
+        dueMonthly: state.dueMonthly + payload.product.price,
+        totalAmount: state.totalAmount + payload.product.price
+      };
+    case AT.REMOVE_BASE_PLAN:
+      return {
+        ...state,
+        products: [...removeProductFromCart(state.products, payload.product)],
+        dueMonthly: state.dueMonthly - payload.product.price,
+        totalAmount: state.totalAmount - payload.product.price
       };
     default:
       return state;
   }
+};
+
+const addProductToCart = (products, newProduct) => {
+  return products.map(item => {
+    return item.id === newProduct.id
+        ? newProduct
+        : item;
+  });
+};
+
+const removeProductFromCart = (products, toRemove) => {
+  return products.filter(item => item.id !== toRemove.id);
 };
 
 export default cartReducer;

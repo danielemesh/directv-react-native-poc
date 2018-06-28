@@ -42,7 +42,7 @@ const productsReducer = (state = initialState, action) => {
     case AT.SELECT_BASE_PLAN:
       return {
         ...state,
-        selectedBasePlanId: payload.id
+        selectedBasePlanId: payload.product.id
       };
     case AT.REMOVE_BASE_PLAN:
       return {

@@ -2,24 +2,28 @@
 	"products": {
 		"basePlans": [
 			{
+				"category": "BASE",
 				"name": "LIVE A LITTLE",
 				"numberOfChannels": "60+ live channels",
 				"image": "https://www.att.com/buy/images/logos-live-a-little@3x.png",
 				"price": 35
 			},
 			{
+				"category": "BASE",
 				"name": "JUST RIGHT",
 				"numberOfChannels": "80+ live channels",
 				"image": "https://www.att.com/buy/images/logos-just-right@3x.png",
 				"price": 50
 			},
 			{
+				"category": "BASE",
 				"name": "GO BIG",
 				"numberOfChannels": "100+ live channels",
 				"image": "https://www.att.com/buy/images/logos-go-big@3x.png",
 				"price": 60
 			},
 			{
+				"category": "BASE",
 				"name": "GOTTA HAVE IT",
 				"numberOfChannels": "120+ live channels",
 				"image": "https://www.att.com/buy/images/logos-gotta-have-it@3x.png",
@@ -28,6 +32,7 @@
 		],
 		"addons": [
 			{
+				"category": "ADDON",
 				"price": 5,
 				"image": "https://www.att.com/buy/images/HBO-logo@2x.png",
 				"featuredPrograms": [
@@ -38,6 +43,7 @@
 				"backgroundColor": "linear-gradient(153deg, rgb(24, 55, 192), rgb(206, 73, 105))"
 			},
 			{
+				"category": "ADDON",
 				"price": 5,
 				"image": "https://www.att.com/buy/images/CINEMAX-logo@2x.png",
 				"featuredPrograms": [
@@ -48,6 +54,7 @@
 				"backgroundColor": "linear-gradient(159deg, rgb(17, 38, 119), rgb(47, 145, 208))"
 			},
 			{
+				"category": "ADDON",
 				"price": 8,
 				"image": "https://www.att.com/buy/images/Showtime-logo@2x.png",
 				"featuredPrograms": [
@@ -58,6 +65,7 @@
 				"backgroundColor": "linear-gradient(159deg, rgb(24, 55, 192), rgb(43, 176, 119))"
 			},
 			{
+				"category": "ADDON",
 				"price": 8,
 				"image": "https://www.att.com/buy/images/STARZ-logo@2x.png",
 				"featuredPrograms": [
@@ -70,12 +78,14 @@
 		],
 		"cdvrs": [
 			{
+				"category": "ADDON",
 				"price": 0,
 				"name": "2 devices at once",
 				"description": "Watch 2 shows on 2 devices—all at the same time.",
 				"isIncluded": true
 			},
 			{
+				"category": "ADDON",
 				"price": 5,
 				"name": "Watch live TV on up to three devices at the same time.",
 				"description": "",
@@ -84,12 +94,14 @@
 		],
 		"streamingDevices": [
 			{
+				"category": "EQUIPMENT",
 				"name": "Apple TV 4K",
 				"image": "https://www.att.com/buy/images/IMG_appleTV@2x.png",
 				"price": 0,
 				"description": "When you prepay 3 months"
 			},
 			{
+				"category": "EQUIPMENT",
 				"name": "Roku Streaming Stick",
 				"image": "https://www.att.com/buy/images/IMG_roku@2x.png",
 				"price": 0,

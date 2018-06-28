@@ -1,14 +1,16 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button, Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+
 import theme from './theme';
 
-export default StickyFooter = ({todayPrice, monthlyPrice}) => {
+const StickyFooter = ({dueToday, dueMonthly}) => {
   return (
       <View elevation={3} style={styles.container}>
         <View style={styles.priceBar}>
-          <PriceItem title="due today" price={40.00} />
-          <PriceItem title="per month" price={35.00} />
+          <PriceItem title="due today" price={dueToday} />
+          <PriceItem title="per month" price={dueMonthly} />
         </View>
         <Button
           title="Let's do this!"
@@ -18,7 +20,7 @@ export default StickyFooter = ({todayPrice, monthlyPrice}) => {
         />
       </View>
   );
-}
+};
 
 const PriceItem = ({title, price}) => (
     <View style={styles.priceContainer}>
@@ -32,6 +34,14 @@ const PriceItem = ({title, price}) => (
       </Text>
     </View>
 );
+
+
+const mapStateToProps = (state) => ({
+  dueToday: state.cart.discounts,
+  dueMonthly: state.cart.dueMonthly
+});
+
+export default connect(mapStateToProps)(StickyFooter);
 
 const styles = StyleSheet.create({
   container: {
@@ -57,7 +67,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   priceTitle: {
-    fontSize: 10,
+    fontSize: 15,
     marginLeft: 10,
   }
 });

@@ -33,7 +33,7 @@ export default PlanCard = ({width, plan, containerStyle, isSelected, onSelect}) 
                 borderRadius={20}
                 buttonStyle={{borderWidth: 2, borderColor: theme.primaryColor}}
                 containerViewStyle={{marginLeft: 0, marginRight: 0}}
-                onPress={() => onSelect(plan.id)}
+                onPress={() => onSelect(plan)}
         />
       </Card>
   );

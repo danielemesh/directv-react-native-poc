@@ -64,6 +64,11 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         selectedStreamingDeviceId: ''
       };
+    case AT.SELECT_CDVR:
+      return {
+        ...state,
+        selectedCdvrId: payload.id
+      };
     default:
       return state;
   }
@@ -78,7 +83,10 @@ const mapProducts = (products) => {
     })),
     basePlans: products.basePlans.map(plan => ({...plan, id: generateGuid()})),
     cdvrs: products.cdvrs.map(cdvr => ({...cdvr, id: generateGuid()})),
-    streamingDevices: products.streamingDevices.map(device => ({...device, id: generateGuid()}))
+    streamingDevices: products.streamingDevices.map(device => ({
+      ...device,
+      id: generateGuid()
+    }))
   };
 };
 

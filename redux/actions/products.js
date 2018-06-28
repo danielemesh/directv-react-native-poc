@@ -36,3 +36,8 @@ export const selectStreamingDevice = (id) => ({
 export const removeStreamingDevice = () => ({
   type: AT.REMOVE_STREAMING_DEVICE
 });
+
+export const selectCdvr = (id) => ({
+  type: AT.SELECT_CDVR,
+  payload: {id}
+});

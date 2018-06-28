@@ -13,7 +13,7 @@ export default StreamingDeviceCard = ({width, data, containerStyle, isSelected, 
         <Text h4>{data.name}</Text>
         <Image source={{uri: data.image}}
                resizeMode="contain"
-               style={{width: imageWidth, height: imageWidth * 0.7}}/>
+               style={{width: imageWidth, height: imageWidth * 0.7, marginBottom: 20}}/>
         <PricePerMonth price={data.price} size={40}/>
         <View>
           <Text style={{color: '#14741f'}}>{data.description}</Text>

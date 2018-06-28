@@ -1,6 +1,7 @@
 export default theme = {
   // Colors
   primaryColor: '#005beb',
+  secondaryColor: '#1a1a1a',
   
   // Layout
   mainContentPadding: 20,

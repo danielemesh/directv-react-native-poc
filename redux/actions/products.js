@@ -23,9 +23,9 @@ export const changeBasePlan = () => ({
   type: AT.CHANGE_BASE_PLAN
 });
 
-export const selectAddon = (id) => ({
+export const selectAddon = (product) => ({
   type: AT.SELECT_ADDON,
-  payload: {id}
+  payload: {product}
 });
 
 export const selectStreamingDevice = (id) => ({

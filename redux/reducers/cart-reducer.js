@@ -27,6 +27,21 @@ const cartReducer = (state = initialState, action) => {
         dueMonthly: state.dueMonthly - payload.product.price,
         totalAmount: state.totalAmount - payload.product.price
       };
+    case AT.SELECT_ADDON:
+      if (!payload.product.isSelected) {
+        return {
+          ...state,
+          products: [...state.products.concat(payload.product)],
+          dueMonthly: state.dueMonthly + payload.product.price,
+          totalAmount: state.totalAmount + payload.product.price
+        };
+      }
+      return {
+        ...state,
+        products: [...state.products.filter(p => p.id !== payload.product.id)],
+        dueMonthly: state.dueMonthly - payload.product.price,
+        totalAmount: state.totalAmount - payload.product.price
+      };
     default:
       return state;
   }

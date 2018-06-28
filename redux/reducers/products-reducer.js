@@ -18,7 +18,7 @@ const addonsReducer = (state = [], action) => {
   switch (type) {
     case AT.SELECT_ADDON:
       return state.map(addon => {
-        if (addon.id === payload.id) {
+        if (addon.id === payload.product.id) {
           return {...addon, isSelected: !addon.isSelected};
         }
         return addon;

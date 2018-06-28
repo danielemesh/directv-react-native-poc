@@ -12,63 +12,10 @@ class Addons extends React.Component {
     super(props);
     
     this.onSelectAddon = this.onSelectAddon.bind(this);
-    
-    //this.state = {
-    //  addons: [
-    //    {
-    //      id: generateGuid(),
-    //      price: 5,
-    //      isSelected: false,
-    //      image: require('../../assets/images/hbo-logo.png'),
-    //      featuredPrograms: [
-    //        'Game of Thrones',
-    //        'Insecure',
-    //        'Westworld'
-    //      ],
-    //      backgroundColor: 'linear-gradient(153deg, rgb(24, 55, 192), rgb(206, 73, 105))'
-    //    },
-    //    {
-    //      id: generateGuid(),
-    //      price: 5,
-    //      isSelected: false,
-    //      image: require('../../assets/images/cinemax-logo.png'),
-    //      featuredPrograms: [
-    //        'The Knick',
-    //        'Banshee',
-    //        'Quarry'
-    //      ],
-    //      backgroundColor: 'linear-gradient(159deg, rgb(17, 38, 119), rgb(47, 145, 208))'
-    //    },
-    //    {
-    //      id: generateGuid(),
-    //      price: 8,
-    //      isSelected: false,
-    //      image: require('../../assets/images/showtime-logo.png'),
-    //      featuredPrograms: [
-    //        'Dexter',
-    //        'Homeland',
-    //        'Penny Dreadful'
-    //      ],
-    //      backgroundColor: 'linear-gradient(159deg, rgb(24, 55, 192), rgb(43, 176, 119))'
-    //    },
-    //    {
-    //      id: generateGuid(),
-    //      price: 8,
-    //      isSelected: false,
-    //      image: require('../../assets/images/starz-logo.png'),
-    //      featuredPrograms: [
-    //        'Power',
-    //        'American Gods',
-    //        'Counterpart'
-    //      ],
-    //      backgroundColor: 'linear-gradient(164deg, rgb(23, 55, 192), rgb(171, 27, 168))'
-    //    }
-    //  ]
-    //};
   }
   
-  onSelectAddon(id) {
-    this.props.selectAddon(id);
+  onSelectAddon(product) {
+    this.props.selectAddon(product);
   }
   
   render() {
@@ -106,7 +53,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  selectAddon: (id) => dispatch(selectAddon(id))
+  selectAddon: (product) => dispatch(selectAddon(product))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Addons);

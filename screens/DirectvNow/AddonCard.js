@@ -40,7 +40,7 @@ export default AddonCard = ({width, addon, containerStyle, onSelect}) => {
                     borderColor: addon.isSelected ? '#fff' : theme.primaryColor
                   }}
                   containerViewStyle={{marginLeft: 0, marginRight: 0}}
-                  onPress={() => onSelect(addon.id)}
+                  onPress={() => onSelect(addon)}
           />
         </View>
       </Card>

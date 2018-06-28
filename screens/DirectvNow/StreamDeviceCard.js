@@ -5,16 +5,18 @@ import PricePerMonth from '../../components/PricePerMonth';
 import theme from '../../theme';
 
 export default StreamingDeviceCard = ({width, data, containerStyle, isSelected, onSelect}) => {
+  const imageWidth = width - (theme.cardPadding * 2);
+  
   return (
       <Card containerStyle={[styles.container, {width}, containerStyle]}
             wrapperStyle={{flex: 1, justifyContent: 'space-between'}}>
         <Text h4>{data.name}</Text>
-        <Image source={data.image}
+        <Image source={{uri: data.image}}
                resizeMode="contain"
-               style={{width: width - (theme.cardPadding * 2)}}/>
+               style={{width: imageWidth, height: imageWidth * 0.7}}/>
         <PricePerMonth price={data.price} size={40}/>
         <View>
-          <Text style={{color: '#14741f'}}>{data.details}</Text>
+          <Text style={{color: '#14741f'}}>{data.description}</Text>
           <Button title="Shipping and offer details"
                   color={theme.primaryColor}
                   backgroundColor="transparent"

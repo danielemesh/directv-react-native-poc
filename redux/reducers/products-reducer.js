@@ -5,7 +5,10 @@ const initialState = {
   basePlans: [],
   addons: [],
   cdvrs: [],
-  selectedBasePlanId: ''
+  streamingDevices: [],
+  selectedBasePlanId: '',
+  selectedCdvrId: '',
+  selectedStreamingDeviceId: ''
 };
 
 // Base Plans Reducer
@@ -51,6 +54,16 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         addons: [...addonsReducer(state.addons, action)]
       };
+    case AT.SELECT_STREAMING_DEVICE:
+      return {
+        ...state,
+        selectedStreamingDeviceId: payload.id
+      };
+    case AT.REMOVE_STREAMING_DEVICE:
+      return {
+        ...state,
+        selectedStreamingDeviceId: ''
+      };
     default:
       return state;
   }
@@ -64,7 +77,8 @@ const mapProducts = (products) => {
       isSelected: false
     })),
     basePlans: products.basePlans.map(plan => ({...plan, id: generateGuid()})),
-    cdvrs: products.cdvrs.map(cdvr => ({...cdvr, id: generateGuid()}))
+    cdvrs: products.cdvrs.map(cdvr => ({...cdvr, id: generateGuid()})),
+    streamingDevices: products.streamingDevices.map(device => ({...device, id: generateGuid()}))
   };
 };
 

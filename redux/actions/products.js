@@ -27,3 +27,12 @@ export const selectAddon = (id) => ({
   type: AT.SELECT_ADDON,
   payload: {id}
 });
+
+export const selectStreamingDevice = (id) => ({
+  type: AT.SELECT_STREAMING_DEVICE,
+  payload: {id}
+});
+
+export const removeStreamingDevice = () => ({
+  type: AT.REMOVE_STREAMING_DEVICE
+});

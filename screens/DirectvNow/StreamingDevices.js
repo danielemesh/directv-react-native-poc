@@ -1,45 +1,29 @@
 import React from 'react';
-import { Image, StyleSheet, View, Dimensions, ScrollView } from 'react-native';
-import { Button, Card, Text } from 'react-native-elements';
+import { StyleSheet, View, Dimensions, ScrollView } from 'react-native';
+import { Text } from 'react-native-elements';
 
 import theme from '../../theme';
-import PricePerMonth from '../../components/PricePerMonth';
 import StreamingDeviceCard from './StreamDeviceCard';
-import { generateGuid } from '../../utils';
+import { connect } from 'react-redux';
+import { removeStreamingDevice, selectStreamingDevice } from '../../redux/actions/products';
 
-export default class StreamingDevices extends React.Component {
+class StreamingDevices extends React.Component {
   constructor(props) {
     super(props);
     
     this.onSelectDevice = this.onSelectDevice.bind(this);
-    
-    this.state = {
-      devices: [
-        {
-          id: generateGuid(),
-          name: 'Apple TV 4K',
-          image: require('../../assets/images/apple-tv.png'),
-          price: 0,
-          details: 'When you prepay 3 months',
-        },
-        {
-          id: generateGuid(),
-          name: 'Roku Streaming Stick',
-          image: require('../../assets/images/roku.png'),
-          price: 0,
-          details: 'When you prepay 1 months',
-        }
-      ],
-      selectedDeviceId: ''
-    };
   }
   
   onSelectDevice(id) {
-    this.setState({selectedDeviceId: id});
+    this.props.selectedStreamingDeviceId === id
+        ? this.props.removeStreamingDevice()
+        : this.props.selectStreamingDevice(id);
   }
   
   render() {
-    const {width} = Dimensions.get('window');
+    const {width}   = Dimensions.get('window');
+    const {devices} = this.props;
+    
     return (
         <View style={styles.container}>
           <View style={styles.panelHeader}>
@@ -49,23 +33,36 @@ export default class StreamingDevices extends React.Component {
           </View>
           
           <ScrollView horizontal>
-            {this.state.devices.map((device, index) => {
-              const isLast = index === this.state.devices.length - 1;
+            {devices.map((device, index) => {
+              const isLast = index === devices.length - 1;
               return (
                   <StreamingDeviceCard
                       key={device.id}
                       data={device}
-                      isSelected={this.state.selectedDeviceId === device.id}
+                      isSelected={this.props.selectedStreamingDeviceId ===
+                      device.id}
                       onSelect={this.onSelectDevice}
                       width={width / 1.6}
                       containerStyle={isLast ? {marginRight: 0} : {}}/>
-              )
+              );
             })}
           </ScrollView>
         </View>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  devices: state.products.streamingDevices,
+  selectedStreamingDeviceId: state.products.selectedStreamingDeviceId
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  selectStreamingDevice: (id) => dispatch(selectStreamingDevice(id)),
+  removeStreamingDevice: () => dispatch(removeStreamingDevice())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(StreamingDevices);
 
 const styles = StyleSheet.create({
   container: {

@@ -16,7 +16,7 @@ const cartReducer = (state = initialState, action) => {
     case AT.SELECT_BASE_PLAN:
       return {
         ...state,
-        products: [...addProductToCart(state.products, payload.product)],
+        products: [...state.products.concat(payload.product)],
         dueMonthly: state.dueMonthly + payload.product.price,
         totalAmount: state.totalAmount + payload.product.price
       };
@@ -47,7 +47,7 @@ const cartReducer = (state = initialState, action) => {
   }
 };
 
-const addProductToCart = (products, newProduct) => {
+const addBasePlanToCart = (products, newProduct) => {
   return products.map(item => {
     return item.id === newProduct.id
         ? newProduct

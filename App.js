@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View, Text } from 'react-native';
 
 import { Provider } from 'react-redux';
 
@@ -9,14 +9,22 @@ import MainHeader from './components/MainHeader';
 import Cart from './screens/Cart/Cart';
 import store from './redux/store';
 import { fetchProducts } from './redux/actions/products';
+import globals from './globals';
+import PageNotFound from './screens/404';
 
 export default class App extends React.Component {
   state = {
-    currentScreen: 'DirectvNow'
+    currentScreen: ''
   };
   
   componentDidMount() {
     store.dispatch(fetchProducts());
+    
+    store.subscribe(() => {
+      this.setState({
+        currentScreen: store.getState().ui.currentScreen
+      });
+    });
   }
   
   render() {
@@ -26,9 +34,11 @@ export default class App extends React.Component {
             <ScrollView>
               <MainHeader/>
               <View style={styles.mainContentContainer}>
-                {this.state.currentScreen === 'DirectvNow'
+                {this.state.currentScreen === globals.screens.DIRECTV_NOW
                     ? (<DirectvNow/>)
-                    : (<Cart/>)}
+                    : this.state.currentScreen === globals.screens.CART
+                        ? (<Cart/>)
+                        : (<PageNotFound/>)}
               </View>
             </ScrollView>
             <StickyFooter/>
@@ -41,9 +51,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eee',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: '#eee'
   },
   mainContentContainer: {
     flex: 1

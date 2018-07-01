@@ -4,7 +4,7 @@ import { Button, Card, Text } from 'react-native-elements';
 import PricePerMonth from '../../components/PricePerMonth';
 import theme from '../../theme';
 
-export default AddonCard = ({width, addon, containerStyle, onSelect}) => {
+export default AddonCard = ({width, addon, containerStyle, isSelected, onSelect}) => {
   return (
       <Card
           containerStyle={[
@@ -31,13 +31,13 @@ export default AddonCard = ({width, addon, containerStyle, onSelect}) => {
             color="#fff"
             containerViewStyle={{marginBottom: 20, alignSelf: 'center'}}/>
         <View>
-          <Button title={addon.isSelected ? 'Remove' : 'Add'}
-                  backgroundColor={addon.isSelected ? 'transparent' : '#fff'}
-                  color={addon.isSelected ? '#fff' : theme.primaryColor}
+          <Button title={isSelected ? 'Remove' : 'Add'}
+                  backgroundColor={isSelected ? 'transparent' : '#fff'}
+                  color={isSelected ? '#fff' : theme.primaryColor}
                   borderRadius={20}
                   buttonStyle={{
                     borderWidth: 2,
-                    borderColor: addon.isSelected ? '#fff' : theme.primaryColor
+                    borderColor: isSelected ? '#fff' : theme.primaryColor
                   }}
                   containerViewStyle={{marginLeft: 0, marginRight: 0}}
                   onPress={() => onSelect(addon)}

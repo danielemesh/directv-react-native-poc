@@ -19,10 +19,8 @@ const cartReducer = (state = initialState, action) => {
   
   switch (type) {
     case AT.ADD_BASE_PLAN_TO_CART:
-      console.log('add to cart');
       return {
         ...state,
-        //products: [...state.products.concat(payload.product)],
         products: {
           ...state.products,
           basePlanId: payload.product.id
@@ -31,10 +29,8 @@ const cartReducer = (state = initialState, action) => {
         totalAmount: state.totalAmount + payload.product.price
       };
     case AT.REMOVE_BASE_PLAN_FROM_CART:
-      console.log('remove from cart');
       return {
         ...state,
-        //products: [...removeProductFromCart(state.products, payload.product)],
         products: {
           ...state.products,
           basePlanId: ''
@@ -42,10 +38,9 @@ const cartReducer = (state = initialState, action) => {
         dueMonthly: state.dueMonthly - payload.product.price,
         totalAmount: state.totalAmount - payload.product.price
       };
-    case AT.SELECT_ADDON:
+    case AT.ADD_ADDON_TO_CART:
       return {
         ...state,
-        //products: [...state.products.concat(payload.product)],
         products: {
           ...state.products,
           addonsIds: [...state.products.addonsIds.concat(payload.product.id)]
@@ -53,15 +48,12 @@ const cartReducer = (state = initialState, action) => {
         dueMonthly: state.dueMonthly + payload.product.price,
         totalAmount: state.totalAmount + payload.product.price
       };
-    case AT.REMOVE_ADDON:
+    case AT.REMOVE_ADDON_FROM_CART:
       return {
         ...state,
-        //products: [...state.products.concat(payload.product)],
         products: {
           ...state.products,
-          addonsIds: [
-            ...state.products.addonsIds.filter(p => p.id !== payload.product.id)
-          ]
+          addonsIds: [...state.products.addonsIds.filter(p => p !== payload.product.id)]
         },
         dueMonthly: state.dueMonthly - payload.product.price,
         totalAmount: state.totalAmount - payload.product.price

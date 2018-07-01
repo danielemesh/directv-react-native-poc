@@ -5,22 +5,29 @@ import theme from '../../theme';
 import { connect } from 'react-redux';
 
 import AddonCard from './AddonCard';
-import { selectAddon } from '../../redux/actions/products';
+import { addAddonToCart, removeAddonFromCart } from '../../redux/actions/cart';
 
 class Addons extends React.Component {
   constructor(props) {
     super(props);
     
-    this.onSelectAddon = this.onSelectAddon.bind(this);
+    this.onAddonCtaPress = this.onAddonCtaPress.bind(this);
   }
   
-  onSelectAddon(product) {
-    this.props.selectAddon(product);
+  onAddonCtaPress(product) {
+    const { selectedAddonsIds } = this.props;
+    
+    if (selectedAddonsIds.includes(product.id)) {
+      this.props.removeAddonFromCart(product);
+    }
+    else {
+      this.props.addAddonToCart(product);
+    }
   }
   
   render() {
     const {width} = Dimensions.get('window');
-    const { addons } = this.props;
+    const { addons, selectedAddonsIds } = this.props;
     
     return (
         <View style={styles.container}>
@@ -31,12 +38,13 @@ class Addons extends React.Component {
           <ScrollView horizontal>
             {addons.map((addon, index) => {
               const isLast = index === addons.length - 1;
+              const isSelected = selectedAddonsIds.includes(addon.id);
               
               return (
                   <AddonCard
                       key={addon.id}
-                      isSelected={addon.isSelected}
-                      onSelect={this.onSelectAddon}
+                      isSelected={isSelected}
+                      onSelect={this.onAddonCtaPress}
                       addon={addon}
                       width={width / 1.6}
                       containerStyle={isLast ? {marginRight: 0} : {}}/>
@@ -49,11 +57,13 @@ class Addons extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  addons: state.products.addons
+  addons: state.products.addons,
+  selectedAddonsIds: state.cart.products.addonsIds,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  selectAddon: (product) => dispatch(selectAddon(product))
+  addAddonToCart: (product) => dispatch(addAddonToCart(product)),
+  removeAddonFromCart: (product) => dispatch(removeAddonFromCart(product)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Addons);

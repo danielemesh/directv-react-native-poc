@@ -73,7 +73,27 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         products: {
           ...state.products,
-          cdvrId: payload.product.id
+          cdvrId: ''
+        },
+        dueMonthly: state.dueMonthly - payload.product.price,
+        totalAmount: state.totalAmount - payload.product.price
+      };
+    case AT.ADD_STREAMING_DEVICE_TO_CART:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          streamingDeviceId: payload.product.id
+        },
+        dueMonthly: state.dueMonthly + payload.product.price,
+        totalAmount: state.totalAmount + payload.product.price
+      };
+    case AT.REMOVE_STREAMING_DEVICE_FROM_CART:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          streamingDeviceId: ''
         },
         dueMonthly: state.dueMonthly - payload.product.price,
         totalAmount: state.totalAmount - payload.product.price

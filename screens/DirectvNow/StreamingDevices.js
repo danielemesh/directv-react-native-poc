@@ -5,7 +5,7 @@ import { Text } from 'react-native-elements';
 import theme from '../../theme';
 import StreamingDeviceCard from './StreamDeviceCard';
 import { connect } from 'react-redux';
-import { removeStreamingDevice, selectStreamingDevice } from '../../redux/actions/products';
+import { addStreamingDeviceToCart, removeStreamingDeviceFromCart } from '../../redux/actions/cart';
 
 class StreamingDevices extends React.Component {
   constructor(props) {
@@ -14,10 +14,21 @@ class StreamingDevices extends React.Component {
     this.onSelectDevice = this.onSelectDevice.bind(this);
   }
   
-  onSelectDevice(id) {
-    this.props.selectedStreamingDeviceId === id
-        ? this.props.removeStreamingDevice()
-        : this.props.selectStreamingDevice(id);
+  onSelectDevice(product) {
+    const { devices, selectedStreamingDeviceId } = this.props;
+    
+    if (selectedStreamingDeviceId === product.id) {
+      this.props.removeStreamingDeviceFromCart(product);
+    }
+    else if (selectedStreamingDeviceId !== '') {
+      const currSelectedDevice = devices.find(d => d.id === selectedStreamingDeviceId);
+  
+      this.props.removeStreamingDeviceFromCart(currSelectedDevice);
+      this.props.addStreamingDeviceToCart(product);
+    }
+    else {
+      this.props.addStreamingDeviceToCart(product);
+    }
   }
   
   render() {
@@ -39,8 +50,7 @@ class StreamingDevices extends React.Component {
                   <StreamingDeviceCard
                       key={device.id}
                       data={device}
-                      isSelected={this.props.selectedStreamingDeviceId ===
-                      device.id}
+                      isSelected={this.props.selectedStreamingDeviceId === device.id}
                       onSelect={this.onSelectDevice}
                       width={width / 1.6}
                       containerStyle={isLast ? {marginRight: 0} : {}}/>
@@ -54,12 +64,12 @@ class StreamingDevices extends React.Component {
 
 const mapStateToProps = (state) => ({
   devices: state.products.streamingDevices,
-  selectedStreamingDeviceId: state.products.selectedStreamingDeviceId
+  selectedStreamingDeviceId: state.cart.products.streamingDeviceId
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  selectStreamingDevice: (id) => dispatch(selectStreamingDevice(id)),
-  removeStreamingDevice: () => dispatch(removeStreamingDevice())
+  addStreamingDeviceToCart: (product) => dispatch(addStreamingDeviceToCart(product)),
+  removeStreamingDeviceFromCart: (product) => dispatch(removeStreamingDeviceFromCart(product))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StreamingDevices);

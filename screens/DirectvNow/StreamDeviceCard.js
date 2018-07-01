@@ -32,7 +32,7 @@ export default StreamingDeviceCard = ({width, data, containerStyle, isSelected, 
                 borderRadius={20}
                 buttonStyle={{borderWidth: 2, borderColor: isSelected ? theme.primaryColor : '#fff'}}
                 containerViewStyle={{marginLeft: 0, marginRight: 0}}
-                onPress={() => onSelect(data.id)}
+                onPress={() => onSelect(data)}
         />
       </Card>
   );

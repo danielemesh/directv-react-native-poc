@@ -29,3 +29,13 @@ export const removeCdvrFromCart = (product) => ({
   type: AT.REMOVE_CDVR_FROM_CART,
   payload: {product}
 });
+
+export const addStreamingDeviceToCart = (product) => ({
+  type: AT.ADD_STREAMING_DEVICE_TO_CART,
+  payload: {product}
+});
+
+export const removeStreamingDeviceFromCart = (product) => ({
+  type: AT.REMOVE_STREAMING_DEVICE_FROM_CART,
+  payload: {product}
+});

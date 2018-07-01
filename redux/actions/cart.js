@@ -19,3 +19,13 @@ export const removeAddonFromCart = (product) => ({
   type: AT.REMOVE_ADDON_FROM_CART,
   payload: {product}
 });
+
+export const addCdvrToCart = (product) => ({
+  type: AT.ADD_CDVR_TO_CART,
+  payload: {product}
+});
+
+export const removeCdvrFromCart = (product) => ({
+  type: AT.REMOVE_CDVR_FROM_CART,
+  payload: {product}
+});

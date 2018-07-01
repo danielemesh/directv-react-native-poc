@@ -58,21 +58,29 @@ const cartReducer = (state = initialState, action) => {
         dueMonthly: state.dueMonthly - payload.product.price,
         totalAmount: state.totalAmount - payload.product.price
       };
+    case AT.ADD_CDVR_TO_CART:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          cdvrId: payload.product.id
+        },
+        dueMonthly: state.dueMonthly + payload.product.price,
+        totalAmount: state.totalAmount + payload.product.price
+      };
+    case AT.REMOVE_CDVR_FROM_CART:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          cdvrId: payload.product.id
+        },
+        dueMonthly: state.dueMonthly - payload.product.price,
+        totalAmount: state.totalAmount - payload.product.price
+      };
     default:
       return state;
   }
 };
-
-//const addBasePlanToCart = (products, newProduct) => {
-//  return products.map(item => {
-//    return item.id === newProduct.id
-//        ? newProduct
-//        : item;
-//  });
-//};
-//
-//const removeProductFromCart = (products, toRemove) => {
-//  return products.filter(item => item.id !== toRemove.id);
-//};
 
 export default cartReducer;

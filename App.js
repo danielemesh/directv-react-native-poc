@@ -28,6 +28,10 @@ export default class App extends React.Component {
     });
   }
   
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.currentScreen !== this.state.currentScreen;
+  }
+  
   render() {
     let mainContent;
     

@@ -6,7 +6,7 @@ const initialState = {
   addons: [],
   cdvrs: [],
   streamingDevices: [],
-  selectedBasePlanId: '',
+  //selectedBasePlanId: '',
   selectedCdvrId: '',
   selectedStreamingDeviceId: ''
 };
@@ -39,16 +39,16 @@ const productsReducer = (state = initialState, action) => {
         ...state,
         ...mapProducts(payload)
       };
-    case AT.SELECT_BASE_PLAN:
-      return {
-        ...state,
-        selectedBasePlanId: payload.product.id
-      };
-    case AT.REMOVE_BASE_PLAN:
-      return {
-        ...state,
-        selectedBasePlanId: ''
-      };
+    //case AT.SELECT_BASE_PLAN:
+    //  return {
+    //    ...state,
+    //    selectedBasePlanId: payload.product.id
+    //  };
+    //case AT.REMOVE_BASE_PLAN:
+    //  return {
+    //    ...state,
+    //    selectedBasePlanId: ''
+    //  };
     case AT.SELECT_ADDON:
       return {
         ...state,

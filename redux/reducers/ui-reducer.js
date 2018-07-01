@@ -10,7 +10,7 @@ const uiReducer = (state = initialState, action) => {
   const {payload} = action;
   
   switch (action.type) {
-    case AT.SELECT_BASE_PLAN:
+    case AT.ADD_BASE_PLAN_TO_CART:
       return {...state, isBasePlansCollapsed: true};
     case AT.CHANGE_BASE_PLAN:
       return {...state, isBasePlansCollapsed: false};

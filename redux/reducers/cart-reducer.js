@@ -6,39 +6,63 @@ const initialState = {
   discounts: 0,
   dueMonthly: 0,
   totalAmount: 0,
-  products: []
+  products: {
+    basePlanId: '',
+    addonsIds: [],
+    cdvrId: '',
+    streamingDeviceId: ''
+  }
 };
 
 const cartReducer = (state = initialState, action) => {
   const {type, payload} = action;
   
   switch (type) {
-    case AT.SELECT_BASE_PLAN:
+    case AT.ADD_BASE_PLAN_TO_CART:
+      console.log('add to cart');
       return {
         ...state,
-        products: [...state.products.concat(payload.product)],
+        //products: [...state.products.concat(payload.product)],
+        products: {
+          ...state.products,
+          basePlanId: payload.product.id
+        },
         dueMonthly: state.dueMonthly + payload.product.price,
         totalAmount: state.totalAmount + payload.product.price
       };
-    case AT.REMOVE_BASE_PLAN:
+    case AT.REMOVE_BASE_PLAN_FROM_CART:
+      console.log('remove from cart');
       return {
         ...state,
-        products: [...removeProductFromCart(state.products, payload.product)],
+        //products: [...removeProductFromCart(state.products, payload.product)],
+        products: {
+          ...state.products,
+          basePlanId: ''
+        },
         dueMonthly: state.dueMonthly - payload.product.price,
         totalAmount: state.totalAmount - payload.product.price
       };
     case AT.SELECT_ADDON:
-      if (!payload.product.isSelected) {
-        return {
-          ...state,
-          products: [...state.products.concat(payload.product)],
-          dueMonthly: state.dueMonthly + payload.product.price,
-          totalAmount: state.totalAmount + payload.product.price
-        };
-      }
       return {
         ...state,
-        products: [...state.products.filter(p => p.id !== payload.product.id)],
+        //products: [...state.products.concat(payload.product)],
+        products: {
+          ...state.products,
+          addonsIds: [...state.products.addonsIds.concat(payload.product.id)]
+        },
+        dueMonthly: state.dueMonthly + payload.product.price,
+        totalAmount: state.totalAmount + payload.product.price
+      };
+    case AT.REMOVE_ADDON:
+      return {
+        ...state,
+        //products: [...state.products.concat(payload.product)],
+        products: {
+          ...state.products,
+          addonsIds: [
+            ...state.products.addonsIds.filter(p => p.id !== payload.product.id)
+          ]
+        },
         dueMonthly: state.dueMonthly - payload.product.price,
         totalAmount: state.totalAmount - payload.product.price
       };
@@ -47,16 +71,16 @@ const cartReducer = (state = initialState, action) => {
   }
 };
 
-const addBasePlanToCart = (products, newProduct) => {
-  return products.map(item => {
-    return item.id === newProduct.id
-        ? newProduct
-        : item;
-  });
-};
-
-const removeProductFromCart = (products, toRemove) => {
-  return products.filter(item => item.id !== toRemove.id);
-};
+//const addBasePlanToCart = (products, newProduct) => {
+//  return products.map(item => {
+//    return item.id === newProduct.id
+//        ? newProduct
+//        : item;
+//  });
+//};
+//
+//const removeProductFromCart = (products, toRemove) => {
+//  return products.filter(item => item.id !== toRemove.id);
+//};
 
 export default cartReducer;

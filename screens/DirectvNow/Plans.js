@@ -3,37 +3,37 @@ import { ScrollView, StyleSheet, View, Alert, Dimensions } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 
 import { connect } from 'react-redux';
-import { changeBasePlan, removeBasePlan, selectBasePlan } from '../../redux/actions/products';
 
 import theme from '../../theme';
 import PlanCard from './PlanCard';
 import PlansSummary from './PlansSummary';
+import { addBasePlanToCart, removeBasePlanFromCart } from '../../redux/actions/cart';
+import { changeBasePlan } from '../../redux/actions/ui';
 
 class Plans extends React.Component {
   constructor(props) {
     super(props);
     
-    this.onSelectBasePlan = this.onSelectBasePlan.bind(this);
-    this.onBasePlanChange = this.onBasePlanChange.bind(this);
+    this.onBasePlanCtaPress = this.onBasePlanCtaPress.bind(this);
+    this.onBasePlanChange   = this.onBasePlanChange.bind(this);
   }
   
-  onSelectBasePlan(product) {
-    const { selectedBasePlanId } = this.props;
+  onBasePlanCtaPress(product) {
+    const {selectedBasePlanId} = this.props;
     
-    // Remove current
+    // Remove current selected base plan
     if (selectedBasePlanId === product.id) {
-      this.props.removeBasePlan(product);
+      this.props.removeBasePlanFromCart(product);
     }
-    // Remove current and select new
+    // Change current selected base plan
     else if (selectedBasePlanId !== '') {
-      const selectedPlan = this.props.basePlans.find(p => p.id === selectedBasePlanId);
-      
-      this.props.removeBasePlan(selectedPlan);
-      this.props.selectBasePlan(product);
+      const currBasePlan = this.props.basePlans.find(b => b.id === selectedBasePlanId);
+      this.props.removeBasePlanFromCart(currBasePlan);
+      this.props.addBasePlanToCart(product);
     }
-    // Select new plan
+    // Select a new base plan
     else {
-      this.props.selectBasePlan(product);
+      this.props.addBasePlanToCart(product);
     }
   }
   
@@ -91,7 +91,7 @@ class Plans extends React.Component {
                   <PlanCard
                       key={plan.id}
                       isSelected={this.props.selectedBasePlanId === plan.id}
-                      onSelect={this.onSelectBasePlan}
+                      onSelect={this.onBasePlanCtaPress}
                       plan={plan}
                       width={width / 1.6}
                       containerStyle={isLast ? {marginRight: 0} : {}}
@@ -106,13 +106,13 @@ class Plans extends React.Component {
 
 const mapStateToProps = (state) => ({
   basePlans: state.products.basePlans,
-  selectedBasePlanId: state.products.selectedBasePlanId,
+  selectedBasePlanId: state.cart.products.basePlanId,
   isBasePlansCollapsed: state.ui.isBasePlansCollapsed
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  selectBasePlan: (product) => dispatch(selectBasePlan(product)),
-  removeBasePlan: (product) => dispatch(removeBasePlan(product)),
+  addBasePlanToCart: (product) => dispatch(addBasePlanToCart(product)),
+  removeBasePlanFromCart: (product) => dispatch(removeBasePlanFromCart(product)),
   changeBasePlan: () => dispatch(changeBasePlan())
 });
 

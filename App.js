@@ -11,10 +11,11 @@ import store from './redux/store';
 import { fetchProducts } from './redux/actions/products';
 import globals from './globals';
 import PageNotFound from './screens/404';
+import Loading from './screens/Loading';
 
 export default class App extends React.Component {
   state = {
-    currentScreen: ''
+    currentScreen: globals.screens.LOADING
   };
   
   componentDidMount() {
@@ -28,17 +29,29 @@ export default class App extends React.Component {
   }
   
   render() {
+    let mainContent;
+    
+    if (this.state.currentScreen === globals.screens.LOADING) {
+      mainContent = <Loading/>;
+    }
+    else if (this.state.currentScreen === globals.screens.DIRECTV_NOW) {
+      mainContent = <DirectvNow/>;
+      
+    }
+    else if (this.state.currentScreen === globals.screens.CART) {
+      mainContent = <Cart/>;
+    }
+    else {
+      mainContent = <PageNotFound/>;
+    }
+    
     return (
         <Provider store={store}>
           <View style={styles.container}>
             <ScrollView>
               <MainHeader/>
               <View style={styles.mainContentContainer}>
-                {this.state.currentScreen === globals.screens.DIRECTV_NOW
-                    ? (<DirectvNow/>)
-                    : this.state.currentScreen === globals.screens.CART
-                        ? (<Cart/>)
-                        : (<PageNotFound/>)}
+                {mainContent}
               </View>
             </ScrollView>
             <StickyFooter/>

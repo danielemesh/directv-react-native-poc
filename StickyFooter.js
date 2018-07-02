@@ -7,7 +7,7 @@ import theme from './theme';
 import { navigateToScreen } from './redux/actions/ui';
 import globals from './globals';
 
-const StickyFooter = ({dueToday, dueMonthly, navigateToCart}) => {
+const StickyFooter = ({dueToday, dueMonthly, onCtaPress, buttonText}) => {
   return (
       <View elevation={3} style={styles.container}>
         <View style={styles.priceBar}>
@@ -15,11 +15,11 @@ const StickyFooter = ({dueToday, dueMonthly, navigateToCart}) => {
           <PriceItem title="per month" price={dueMonthly} />
         </View>
         <Button
-          title="Let's do this!"
+          title={buttonText}
           backgroundColor={theme.primaryColor}
           containerViewStyle={{marginLeft: 0, marginRight: 0}}
           titleStyle={{fontWeight: 'bold'}}
-          onPress={() => navigateToCart()}
+          onPress={() => onCtaPress()}
         />
       </View>
   );
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  navigateToCart: () => dispatch(navigateToScreen(globals.screens.CART))
+  //navigateToCart: () => dispatch(navigateToScreen(globals.screens.CART))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StickyFooter);

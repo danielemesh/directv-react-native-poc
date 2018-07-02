@@ -4,8 +4,10 @@ import { Text, Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import theme from './theme';
+import { navigateToScreen } from './redux/actions/ui';
+import globals from './globals';
 
-const StickyFooter = ({dueToday, dueMonthly}) => {
+const StickyFooter = ({dueToday, dueMonthly, navigateToCart}) => {
   return (
       <View elevation={3} style={styles.container}>
         <View style={styles.priceBar}>
@@ -17,6 +19,7 @@ const StickyFooter = ({dueToday, dueMonthly}) => {
           backgroundColor={theme.primaryColor}
           containerViewStyle={{marginLeft: 0, marginRight: 0}}
           titleStyle={{fontWeight: 'bold'}}
+          onPress={() => navigateToCart()}
         />
       </View>
   );
@@ -41,7 +44,11 @@ const mapStateToProps = (state) => ({
   dueMonthly: state.cart.dueMonthly
 });
 
-export default connect(mapStateToProps)(StickyFooter);
+const mapDispatchToProps = (dispatch) => ({
+  navigateToCart: () => dispatch(navigateToScreen(globals.screens.CART))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(StickyFooter);
 
 const styles = StyleSheet.create({
   container: {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import theme from '../../theme';
 import PricePerMonth from '../../components/PricePerMonth';
-import { selectCdvr } from '../../redux/actions/products';
+import { addCdvrToCart, removeCdvrFromCart } from '../../redux/actions/cart';
 
 class Cdvr extends React.Component {
   constructor(props) {
@@ -14,8 +14,18 @@ class Cdvr extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
   
-  onChange(id) {
-    this.props.selectCdvr(id);
+  onChange(product) {
+    const { cdvrs, selectedCdvrId } = this.props;
+    
+    if (selectedCdvrId === '') {
+      this.props.addCdvrToCart(product);
+    }
+    else if (selectedCdvrId !== product.id) {
+      const currSelectedCdvr = cdvrs.find(c => c.id === selectedCdvrId);
+      
+      this.props.removeCdvrFromCart(currSelectedCdvr);
+      this.props.addCdvrToCart(product);
+    }
   }
   
   render() {
@@ -36,8 +46,9 @@ class Cdvr extends React.Component {
           
           <View style={{flex: 1}}>
             {cdvrs.map(cdvr => {
-              const checked = cdvr.id === selectedCdvrId
-                  || (selectedCdvrId === '' && cdvr.isIncluded);
+              //const checked = cdvr.id === selectedCdvrId
+              //    || (selectedCdvrId === '' && cdvr.isIncluded);
+              const checked = selectedCdvrId === cdvr.id;
               
               return (
                   <CdvrItem
@@ -56,7 +67,7 @@ class Cdvr extends React.Component {
 
 const CdvrItem = ({cdvr, onSelect, checked}) => {
   return (
-      <TouchableNativeFeedback onPress={() => onSelect(cdvr.id)}>
+      <TouchableNativeFeedback onPress={() => onSelect(cdvr)}>
         <View style={styles.streamOption}>
           <CheckBox
               title=""
@@ -67,7 +78,7 @@ const CdvrItem = ({cdvr, onSelect, checked}) => {
               textStyle={{fontSize: 10}}
               checkedColor={theme.primaryColor}
               checked={checked}
-              onPress={() => onSelect(cdvr.id)}
+              onPress={() => onSelect(cdvr)}
           />
           <View style={{flex: 1}}>
             <Text style={styles.label}>{cdvr.name}</Text>
@@ -92,11 +103,12 @@ const CdvrItem = ({cdvr, onSelect, checked}) => {
 
 const mapStateToProps = (state) => ({
   cdvrs: state.products.cdvrs,
-  selectedCdvrId: state.products.selectedCdvrId
+  selectedCdvrId: state.cart.products.cdvrId
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  selectCdvr: (id) => dispatch(selectCdvr(id))
+  addCdvrToCart: (product) => dispatch(addCdvrToCart(product)),
+  removeCdvrFromCart: (product) => dispatch(removeCdvrFromCart(product)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cdvr);

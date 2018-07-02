@@ -6,57 +6,101 @@ const initialState = {
   discounts: 0,
   dueMonthly: 0,
   totalAmount: 0,
-  products: []
+  products: {
+    basePlanId: '',
+    addonsIds: [],
+    cdvrId: '',
+    streamingDeviceId: ''
+  }
 };
 
 const cartReducer = (state = initialState, action) => {
   const {type, payload} = action;
   
   switch (type) {
-    case AT.SELECT_BASE_PLAN:
+    case AT.ADD_BASE_PLAN_TO_CART:
       return {
         ...state,
-        products: [...addProductToCart(state.products, payload.product)],
+        products: {
+          ...state.products,
+          basePlanId: payload.product.id
+        },
         dueMonthly: state.dueMonthly + payload.product.price,
         totalAmount: state.totalAmount + payload.product.price
       };
-    case AT.REMOVE_BASE_PLAN:
+    case AT.REMOVE_BASE_PLAN_FROM_CART:
       return {
         ...state,
-        products: [...removeProductFromCart(state.products, payload.product)],
+        products: {
+          ...state.products,
+          basePlanId: ''
+        },
         dueMonthly: state.dueMonthly - payload.product.price,
         totalAmount: state.totalAmount - payload.product.price
       };
-    case AT.SELECT_ADDON:
-      if (!payload.product.isSelected) {
-        return {
-          ...state,
-          products: [...state.products.concat(payload.product)],
-          dueMonthly: state.dueMonthly + payload.product.price,
-          totalAmount: state.totalAmount + payload.product.price
-        };
-      }
+    case AT.ADD_ADDON_TO_CART:
       return {
         ...state,
-        products: [...state.products.filter(p => p.id !== payload.product.id)],
+        products: {
+          ...state.products,
+          addonsIds: [...state.products.addonsIds.concat(payload.product.id)]
+        },
+        dueMonthly: state.dueMonthly + payload.product.price,
+        totalAmount: state.totalAmount + payload.product.price
+      };
+    case AT.REMOVE_ADDON_FROM_CART:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          addonsIds: [...state.products.addonsIds.filter(p => p !== payload.product.id)]
+        },
+        dueMonthly: state.dueMonthly - payload.product.price,
+        totalAmount: state.totalAmount - payload.product.price
+      };
+    case AT.ADD_CDVR_TO_CART:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          cdvrId: payload.product.id
+        },
+        dueMonthly: state.dueMonthly + payload.product.price,
+        totalAmount: state.totalAmount + payload.product.price
+      };
+    case AT.REMOVE_CDVR_FROM_CART:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          cdvrId: ''
+        },
+        dueMonthly: state.dueMonthly - payload.product.price,
+        totalAmount: state.totalAmount - payload.product.price
+      };
+    case AT.ADD_STREAMING_DEVICE_TO_CART:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          streamingDeviceId: payload.product.id
+        },
+        dueMonthly: state.dueMonthly + payload.product.price,
+        totalAmount: state.totalAmount + payload.product.price
+      };
+    case AT.REMOVE_STREAMING_DEVICE_FROM_CART:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          streamingDeviceId: ''
+        },
         dueMonthly: state.dueMonthly - payload.product.price,
         totalAmount: state.totalAmount - payload.product.price
       };
     default:
       return state;
   }
-};
-
-const addProductToCart = (products, newProduct) => {
-  return products.map(item => {
-    return item.id === newProduct.id
-        ? newProduct
-        : item;
-  });
-};
-
-const removeProductFromCart = (products, toRemove) => {
-  return products.filter(item => item.id !== toRemove.id);
 };
 
 export default cartReducer;

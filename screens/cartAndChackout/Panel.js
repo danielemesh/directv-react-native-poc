@@ -10,6 +10,7 @@ const Panel = ({children}) => (
 
 const styles = StyleSheet.create({
   panel: {
+    marginBottom: 30,
     padding: theme.panelInnerPadding,
     backgroundColor: theme.panelBgColor
   }

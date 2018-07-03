@@ -5,6 +5,7 @@ import Panel from '../cartAndChackout/Panel';
 import ContactInfo from '../cartAndChackout/ContactInfo';
 import BillingAddress from '../cartAndChackout/BillingAddress';
 import AccountAccess from '../cartAndChackout/AccountAccess';
+import Payment from '../cartAndChackout/Paymant';
 
 class Checkout extends React.Component {
   render() {
@@ -20,6 +21,9 @@ class Checkout extends React.Component {
           </Panel>
           <Panel>
             <AccountAccess/>
+          </Panel>
+          <Panel>
+            <Payment/>
           </Panel>
         </View>
     );

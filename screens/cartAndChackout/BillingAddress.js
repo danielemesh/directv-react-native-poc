@@ -75,6 +75,7 @@ class BillingAddress extends React.Component {
           
           <LabeledPicker
               label="State"
+              pickerStyle={{height: 40}}
               viewContainerStyle={styles.inputContainer}
               items={[
                 {label: 'Alabama', value: 'AL'},

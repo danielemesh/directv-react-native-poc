@@ -2,8 +2,9 @@ import React from 'react';
 import { Picker, StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import { generateGuid } from '../../utils';
+import theme from '../../theme';
 
-const LabeledPicker = ({label, height = 40, items, viewContainerStyle, labelStyle, pickerStyle, selectedValue, onValueChange}) => (
+const LabeledPicker = ({label, items, viewContainerStyle, labelStyle, pickerStyle, selectedValue, onValueChange}) => (
     <View style={[styles.container, viewContainerStyle]}>
       <Text style={[styles.label, labelStyle]}>{label}</Text>
       <Picker
@@ -20,7 +21,7 @@ const LabeledPicker = ({label, height = 40, items, viewContainerStyle, labelStyl
 const styles = StyleSheet.create({
   container: {},
   label: {
-    fontSize: 20
+    fontSize: theme.controlLabelFontSize
   },
   picker: {}
 });

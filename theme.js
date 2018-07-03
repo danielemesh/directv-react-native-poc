@@ -19,4 +19,7 @@ export default theme = {
   // Buttons
   btnDisabledBgColor: '#959595',
   btnBorderRadius: 20,
+  
+  // Form Controls
+  controlLabelFontSize: 20,
 };

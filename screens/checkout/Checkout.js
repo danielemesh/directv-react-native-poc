@@ -6,6 +6,7 @@ import ContactInfo from '../cartAndChackout/ContactInfo';
 import BillingAddress from '../cartAndChackout/BillingAddress';
 import AccountAccess from '../cartAndChackout/AccountAccess';
 import Payment from '../cartAndChackout/Paymant';
+import TermsAndConditions from '../cartAndChackout/TermsAndConditions';
 
 class Checkout extends React.Component {
   render() {
@@ -24,6 +25,9 @@ class Checkout extends React.Component {
           </Panel>
           <Panel>
             <Payment/>
+          </Panel>
+          <Panel>
+            <TermsAndConditions/>
           </Panel>
         </View>
     );

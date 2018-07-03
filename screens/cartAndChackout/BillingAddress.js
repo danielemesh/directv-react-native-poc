@@ -1,19 +1,31 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Picker, StyleSheet, View } from 'react-native';
 import theme from '../../theme';
 import LabeledTextInput from '../../components/common/LabeledTextInput';
 import LabeledIcon from '../../components/common/LabeledIcon';
 import { Button, Text } from 'react-native-elements';
+import LabeledPicker from '../../components/common/LabeledPicker';
 
 class BillingAddress extends React.Component {
   constructor(props) {
     super(props);
     
+    this.state = {
+      selectedState: ''
+    };
+    
     this.onChangeText = this.onChangeText.bind(this);
+    this.onStateSelected = this.onStateSelected.bind(this);
   }
   
   onChangeText(text) {
     console.log(text);
+  }
+  
+  onStateSelected(itemValue, itemIndex) {
+    console.log(itemValue);
+    this.setState({selectedState: itemValue})
+    
   }
   
   render() {
@@ -33,7 +45,7 @@ class BillingAddress extends React.Component {
               label="Attention (optional)"
               viewContainerStyle={styles.inputContainer}
               inputProps={{
-                textContentType: 'name',
+                textContentType: 'name'
               }}
               onChangeText={this.onChangeText}/>
           
@@ -41,7 +53,7 @@ class BillingAddress extends React.Component {
               label="Address line 1"
               viewContainerStyle={styles.inputContainer}
               inputProps={{
-                textContentType: 'streetAddressLine1',
+                textContentType: 'streetAddressLine1'
               }}
               onChangeText={this.onChangeText}/>
           
@@ -60,15 +72,19 @@ class BillingAddress extends React.Component {
                 textContentType: 'addressCity'
               }}
               onChangeText={this.onChangeText}/>
-  
-          <LabeledTextInput
+          
+          <LabeledPicker
               label="State"
               viewContainerStyle={styles.inputContainer}
-              inputProps={{
-                textContentType: 'addressState'
-              }}
-              onChangeText={this.onChangeText}/>
-  
+              items={[
+                {label: 'Alabama', value: 'AL'},
+                {label: 'Alaska', value: 'AK'},
+                {label: 'Arizona', value: 'AZ'}
+              ]}
+              selectedValue={this.state.selectedState}
+              onValueChange={this.onStateSelected}
+          />
+          
           <LabeledTextInput
               label="Zip code"
               viewContainerStyle={styles.inputContainer}

@@ -1,43 +1,28 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, Button, Icon } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import theme from './theme';
-import { navigateToScreen } from './redux/actions/ui';
-import globals from './globals';
+import LabeledPrice from './components/common/LabeledPrice';
 
-const StickyFooter = ({dueToday, dueMonthly, navigateToCart}) => {
+const StickyFooter = ({dueToday, dueMonthly, onCtaPress, buttonText}) => {
   return (
       <View elevation={3} style={styles.container}>
         <View style={styles.priceBar}>
-          <PriceItem title="due today" price={dueToday} />
-          <PriceItem title="per month" price={dueMonthly} />
+          <LabeledPrice label="due today" price={dueToday}/>
+          <LabeledPrice label="per month" price={dueMonthly}/>
         </View>
         <Button
-          title="Let's do this!"
-          backgroundColor={theme.primaryColor}
-          containerViewStyle={{marginLeft: 0, marginRight: 0}}
-          titleStyle={{fontWeight: 'bold'}}
-          onPress={() => navigateToCart()}
+            title={buttonText}
+            backgroundColor={theme.primaryColor}
+            containerViewStyle={{marginLeft: 0, marginRight: 0}}
+            titleStyle={{fontWeight: 'bold'}}
+            onPress={() => onCtaPress()}
         />
       </View>
   );
 };
-
-const PriceItem = ({title, price}) => (
-    <View style={styles.priceContainer}>
-      <Icon type="font-awesome"
-            name="usd"
-            size={30}
-      />
-      <Text style={styles.price}>
-        <Text style={styles.priceValue}>{price}</Text>
-        <Text style={styles.priceTitle}>{title}</Text>
-      </Text>
-    </View>
-);
-
 
 const mapStateToProps = (state) => ({
   dueToday: state.cart.discounts,
@@ -45,7 +30,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  navigateToCart: () => dispatch(navigateToScreen(globals.screens.CART))
+  //navigateToCart: () => dispatch(navigateToScreen(globals.screens.CART))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StickyFooter);
@@ -53,7 +38,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(StickyFooter);
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'stretch',
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
     //shadowColor: '#000',
     //shadowOffset: { width: 0, height: 3 },
     //shadowOpacity: 0.8,
@@ -63,18 +48,5 @@ const styles = StyleSheet.create({
     padding: 20,
     flexDirection: 'row',
     justifyContent: 'space-between'
-  },
-  priceContainer: {
-    flexDirection: 'row',
-  },
-  price: {
-    fontSize: 30,
-  },
-  priceValue: {
-    fontWeight: 'bold',
-  },
-  priceTitle: {
-    fontSize: 15,
-    marginLeft: 10,
   }
 });

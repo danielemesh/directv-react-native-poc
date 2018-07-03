@@ -29,7 +29,7 @@ export default StreamingDeviceCard = ({width, data, containerStyle, isSelected, 
         <Button title={isSelected ? 'Remove' : 'Add'}
                 backgroundColor={isSelected ? 'transparent' : theme.primaryColor}
                 color={isSelected ? theme.primaryColor : '#fff'}
-                borderRadius={20}
+                borderRadius={theme.btnBorderRadius}
                 buttonStyle={{borderWidth: 2, borderColor: isSelected ? theme.primaryColor : '#fff'}}
                 containerViewStyle={{marginLeft: 0, marginRight: 0}}
                 onPress={() => onSelect(data)}

@@ -15,4 +15,11 @@ export default theme = {
   // Card
   cardPadding: 15, // from react-native-elements <Card />
   cardMarginRight: 30,
+  
+  // Buttons
+  btnDisabledBgColor: '#959595',
+  btnBorderRadius: 20,
+  
+  // Form Controls
+  controlLabelFontSize: 20,
 };

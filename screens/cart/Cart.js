@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 import { navigateToScreen } from '../../redux/actions/ui';
 import globals from '../../globals';
 import PricePerMonth from '../../components/PricePerMonth';
+import Header from '../cartAndChackout/Header';
+import Panel from '../cartAndChackout/Panel';
+import LabeledIcon from '../../components/common/LabeledIcon';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -20,33 +23,26 @@ class Cart extends React.Component {
   }
   
   render() {
-    console.log('products: ', this.props.cart.products);
     return (
         <View style={styles.container}>
-          <Text h1 style={styles.title}>My Cart</Text>
+          <Header title={'My Cart'}/>
           
-          <View style={styles.panelContainer}>
+          <Panel>
             <View style={styles.summaryHeader}>
-              <View style={styles.summaryHeaderTitle}>
-                <Icon type="font-awesome" name="tv"
-                      size={20}
-                      raised
-                      color={theme.primaryColor} reverse/>
-                <Text h4>DIRECTV NOW</Text>
-              </View>
+              <LabeledIcon iconName="tv" size={20} label="DIRECTV NOW" />
               <ClearButton title="Edit" onPress={this.onEditCartPress}/>
             </View>
-            <View style={styles.cartItems}>
-              {this.props.cart.products.map(product => {
-                return (
-                    <View key={product.id} style={styles.cartItem}>
-                      <Text>{product.name}</Text>
-                      <PricePerMonth price={product.price} size={20} />
-                    </View>
-                );
-              })}
-            </View>
-          </View>
+            {/*<View style={styles.cartItems}>*/}
+              {/*{this.props.cart.products.map(product => {*/}
+                {/*return (*/}
+                    {/*<View key={product.id} style={styles.cartItem}>*/}
+                      {/*<Text>{product.name}</Text>*/}
+                      {/*<PricePerMonth price={product.price} size={20} />*/}
+                    {/*</View>*/}
+                {/*);*/}
+              {/*})}*/}
+            {/*</View>*/}
+          </Panel>
         </View>
     );
   }
@@ -65,14 +61,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Cart);
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  title: {
-    marginTop: 30,
-    marginBottom: 30
-  },
-  panelContainer: {
-    padding: theme.panelInnerPadding,
-    backgroundColor: theme.panelBgColor
   },
   summaryHeader: {
     flexDirection: 'row',

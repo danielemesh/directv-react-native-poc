@@ -6,14 +6,21 @@ import { Provider } from 'react-redux';
 import StickyFooter from './StickyFooter';
 import DirectvNow from './screens/DirectvNow/DirectvNow';
 import MainHeader from './components/MainHeader';
-import Cart from './screens/Cart/Cart';
+import Cart from './screens/cart/Cart';
 import store from './redux/store';
 import { fetchProducts } from './redux/actions/products';
 import globals from './globals';
 import PageNotFound from './screens/404';
 import Loading from './screens/Loading';
+import Checkout from './screens/checkout/Checkout';
+import CartAndCheckout from './screens/cartAndChackout/CartAndCheckout';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.onStickyFooterCtaPress = this.onStickyFooterCtaPress.bind(this);
+  }
   state = {
     currentScreen: globals.screens.LOADING
   };
@@ -23,9 +30,14 @@ export default class App extends React.Component {
     
     store.subscribe(() => {
       this.setState({
-        currentScreen: store.getState().ui.currentScreen
+        //currentScreen: store.getState().ui.currentScreen
+        currentScreen: globals.screens.CART_AND_CHECKOUT
       });
     });
+  }
+  
+  onStickyFooterCtaPress() {
+    console.log('CTA Clicked!!');
   }
   
   shouldComponentUpdate(nextProps, nextState) {
@@ -42,9 +54,15 @@ export default class App extends React.Component {
       mainContent = <DirectvNow/>;
       
     }
-    else if (this.state.currentScreen === globals.screens.CART) {
-      mainContent = <Cart/>;
+    else if (this.state.currentScreen === globals.screens.CART_AND_CHECKOUT) {
+      mainContent = <CartAndCheckout/>;
     }
+    //else if (this.state.currentScreen === globals.screens.CART) {
+    //  mainContent = <Cart/>;
+    //}
+    //else if (this.state.currentScreen === globals.screens.CHECKOUT) {
+    //  mainContent = <Checkout/>;
+    //}
     else {
       mainContent = <PageNotFound/>;
     }
@@ -58,7 +76,7 @@ export default class App extends React.Component {
                 {mainContent}
               </View>
             </ScrollView>
-            <StickyFooter/>
+            <StickyFooter onCtaPress={this.onStickyFooterCtaPress} buttonText={`Let's do this!`}/>
           </View>
         </Provider>
     );

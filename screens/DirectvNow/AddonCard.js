@@ -34,7 +34,7 @@ export default AddonCard = ({width, addon, containerStyle, isSelected, onSelect}
           <Button title={isSelected ? 'Remove' : 'Add'}
                   backgroundColor={isSelected ? 'transparent' : '#fff'}
                   color={isSelected ? '#fff' : theme.primaryColor}
-                  borderRadius={20}
+                  borderRadius={theme.btnBorderRadius}
                   buttonStyle={{
                     borderWidth: 2,
                     borderColor: isSelected ? '#fff' : theme.primaryColor

@@ -30,7 +30,7 @@ export default PlanCard = ({width, plan, containerStyle, isSelected, onSelect}) 
         <Button title={isSelected ? 'Remove plan' : 'Select plan'}
                 backgroundColor={isSelected ? '#fff' : theme.primaryColor}
                 color={isSelected ? theme.primaryColor : '#fff'}
-                borderRadius={20}
+                borderRadius={theme.btnBorderRadius}
                 buttonStyle={{borderWidth: 2, borderColor: theme.primaryColor}}
                 containerViewStyle={{marginLeft: 0, marginRight: 0}}
                 onPress={() => onSelect(plan)}

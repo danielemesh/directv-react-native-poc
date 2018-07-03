@@ -1,5 +1,5 @@
 import React from 'react';
-import { Picker, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import theme from '../../theme';
 import LabeledTextInput from '../../components/common/LabeledTextInput';
 import LabeledIcon from '../../components/common/LabeledIcon';
@@ -14,7 +14,7 @@ class BillingAddress extends React.Component {
       selectedState: ''
     };
     
-    this.onChangeText = this.onChangeText.bind(this);
+    this.onChangeText    = this.onChangeText.bind(this);
     this.onStateSelected = this.onStateSelected.bind(this);
   }
   
@@ -24,7 +24,7 @@ class BillingAddress extends React.Component {
   
   onStateSelected(itemValue, itemIndex) {
     console.log(itemValue);
-    this.setState({selectedState: itemValue})
+    this.setState({selectedState: itemValue});
     
   }
   
@@ -94,7 +94,7 @@ class BillingAddress extends React.Component {
               title="Add this address"
               backgroundColor={theme.primaryColor}
               color={'#fff'}
-              borderRadius={20}
+              borderRadius={theme.btnBorderRadius}
               containerViewStyle={{marginLeft: 0, marginRight: 0}}
           />
         </View>

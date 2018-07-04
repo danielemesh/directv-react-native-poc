@@ -8,11 +8,20 @@ class ContactInfo extends React.Component {
   constructor(props) {
     super(props);
     
+    this.inputs = {firstName: React.createRef(), lastName: React.createRef()};
+    
+    this.state = {
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      emailAddress: ''
+    };
+    
     this.onChangeText = this.onChangeText.bind(this);
   }
   
-  onChangeText(text) {
-    console.log(text);
+  onChangeText(text, key) {
+    console.log(text, key);
   }
   
   render() {
@@ -25,38 +34,46 @@ class ContactInfo extends React.Component {
                        label="Contact Info"/>
           
           <LabeledTextInput
+              setRef={input => this.inputs.firstName = input}
               label="First name"
               viewContainerStyle={styles.inputContainer}
               inputProps={{
                 textContentType: 'name',
+                blurOnSubmit: false,
+                returnKeyType: 'next',
+                onSubmitEditing: () => {
+                  this.inputs.lastName.focus();
+                }
               }}
-              onChangeText={this.onChangeText}/>
+              onChangeText={(text) => this.onChangeText(text, 'firstName')}/>
           
           <LabeledTextInput
+              setRef={input => this.inputs.lastName = input}
               label="Last name"
               viewContainerStyle={styles.inputContainer}
               inputProps={{
                 textContentType: 'familyName',
+                returnKeyType: 'done'
               }}
-              onChangeText={this.onChangeText}/>
+              onChangeText={(text) => this.onChangeText(text, 'lastName')}/>
           
-          <LabeledTextInput
-              label="Contact phone number"
-              viewContainerStyle={styles.inputContainer}
-              inputProps={{
-                keyboardType: 'phone-pad',
-                textContentType: 'telephoneNumber'
-              }}
-              onChangeText={this.onChangeText}/>
+          {/*<LabeledTextInput*/}
+              {/*label="Contact phone number"*/}
+              {/*viewContainerStyle={styles.inputContainer}*/}
+              {/*inputProps={{*/}
+                {/*keyboardType: 'phone-pad',*/}
+                {/*textContentType: 'telephoneNumber'*/}
+              {/*}}*/}
+              {/*onChangeText={(text) => this.onChangeText(text, 'phoneNumber')}/>*/}
           
-          <LabeledTextInput
-              label="Email"
-              viewContainerStyle={styles.inputContainer}
-              inputProps={{
-                keyboardType: 'email-address',
-                textContentType: 'emailAddress'
-              }}
-              onChangeText={this.onChangeText}/>
+          {/*<LabeledTextInput*/}
+              {/*label="Email"*/}
+              {/*viewContainerStyle={styles.inputContainer}*/}
+              {/*inputProps={{*/}
+                {/*keyboardType: 'email-address',*/}
+                {/*textContentType: 'emailAddress'*/}
+              {/*}}*/}
+              {/*onChangeText={(text) => this.onChangeText(text, 'emailAddress')}/>*/}
         </View>
     );
   }

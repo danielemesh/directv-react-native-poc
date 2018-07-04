@@ -17,18 +17,18 @@ class Checkout extends React.Component {
           <Panel>
             <ContactInfo/>
           </Panel>
-          <Panel>
-            <BillingAddress/>
-          </Panel>
-          <Panel>
-            <AccountAccess/>
-          </Panel>
-          <Panel>
-            <Payment/>
-          </Panel>
-          <Panel>
-            <TermsAndConditions/>
-          </Panel>
+          {/*<Panel>*/}
+            {/*<BillingAddress/>*/}
+          {/*</Panel>*/}
+          {/*<Panel>*/}
+            {/*<AccountAccess/>*/}
+          {/*</Panel>*/}
+          {/*<Panel>*/}
+            {/*<Payment/>*/}
+          {/*</Panel>*/}
+          {/*<Panel>*/}
+            {/*<TermsAndConditions/>*/}
+          {/*</Panel>*/}
         </View>
     );
   }

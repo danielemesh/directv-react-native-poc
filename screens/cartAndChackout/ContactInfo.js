@@ -1,14 +1,17 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import theme from '../../theme';
-import LabeledTextInput from '../../components/common/LabeledTextInput';
-import LabeledIcon from '../../components/common/LabeledIcon';
+
+import { LabeledTextInput, LabeledIcon, Panel, PanelHeader } from '../../components';
 
 class ContactInfo extends React.Component {
   constructor(props) {
     super(props);
     
-    this.inputs = {firstName: React.createRef(), lastName: React.createRef()};
+    this.controls = {
+      firstName: React.createRef(),
+      lastName: React.createRef(),
+      phoneNumber: React.createRef(),
+      emailAddress: React.createRef()
+    };
     
     this.state = {
       firstName: '',
@@ -17,78 +20,78 @@ class ContactInfo extends React.Component {
       emailAddress: ''
     };
     
-    this.onChangeText = this.onChangeText.bind(this);
+    this.onChangeText     = this.onChangeText.bind(this);
+    this.focusNextControl = this.focusNextControl.bind(this);
+  }
+  
+  focusNextControl(key) {
+    this.controls[key].focus();
   }
   
   onChangeText(text, key) {
-    console.log(text, key);
+    this.setState({
+      [key]: text
+    });
   }
   
   render() {
     return (
-        <View style={styles.container}>
-          <LabeledIcon viewContainerStyle={styles.header}
-                       iconType="ionicons"
-                       iconName="person"
-                       size={20}
-                       label="Contact Info"/>
+        <Panel>
+          <PanelHeader>
+            <LabeledIcon
+                iconType="ionicons"
+                iconName="person"
+                size={20}
+                label="Contact Info"/>
+          </PanelHeader>
           
           <LabeledTextInput
-              setRef={input => this.inputs.firstName = input}
               label="First name"
-              viewContainerStyle={styles.inputContainer}
+              setRef={input => this.controls.firstName = input}
               inputProps={{
                 textContentType: 'name',
                 blurOnSubmit: false,
                 returnKeyType: 'next',
-                onSubmitEditing: () => {
-                  this.inputs.lastName.focus();
-                }
+                onSubmitEditing: () => this.focusNextControl('lastName')
               }}
               onChangeText={(text) => this.onChangeText(text, 'firstName')}/>
           
           <LabeledTextInput
-              setRef={input => this.inputs.lastName = input}
               label="Last name"
-              viewContainerStyle={styles.inputContainer}
+              setRef={input => this.controls.lastName = input}
               inputProps={{
                 textContentType: 'familyName',
-                returnKeyType: 'done'
+                blurOnSubmit: false,
+                returnKeyType: 'next',
+                onSubmitEditing: () => this.focusNextControl('phoneNumber')
               }}
               onChangeText={(text) => this.onChangeText(text, 'lastName')}/>
           
-          {/*<LabeledTextInput*/}
-              {/*label="Contact phone number"*/}
-              {/*viewContainerStyle={styles.inputContainer}*/}
-              {/*inputProps={{*/}
-                {/*keyboardType: 'phone-pad',*/}
-                {/*textContentType: 'telephoneNumber'*/}
-              {/*}}*/}
-              {/*onChangeText={(text) => this.onChangeText(text, 'phoneNumber')}/>*/}
+          <LabeledTextInput
+              label="Contact phone number"
+              setRef={input => this.controls.phoneNumber = input}
+              inputProps={{
+                keyboardType: 'phone-pad',
+                textContentType: 'telephoneNumber',
+                blurOnSubmit: false,
+                returnKeyType: 'next',
+                onSubmitEditing: () => this.focusNextControl('emailAddress')
+              }}
+              onChangeText={(text) => this.onChangeText(text, 'phoneNumber')}/>
           
-          {/*<LabeledTextInput*/}
-              {/*label="Email"*/}
-              {/*viewContainerStyle={styles.inputContainer}*/}
-              {/*inputProps={{*/}
-                {/*keyboardType: 'email-address',*/}
-                {/*textContentType: 'emailAddress'*/}
-              {/*}}*/}
-              {/*onChangeText={(text) => this.onChangeText(text, 'emailAddress')}/>*/}
-        </View>
+          <LabeledTextInput
+              label="Email"
+              setRef={input => this.controls.emailAddress = input}
+              inputProps={{
+                keyboardType: 'email-address',
+                textContentType: 'emailAddress',
+                blurOnSubmit: true,
+                returnKeyType: 'done'
+              }}
+              onChangeText={(text) => this.onChangeText(text, 'emailAddress')}/>
+        </Panel>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  header: {
-    marginBottom: 30
-  },
-  inputContainer: {
-    marginBottom: theme.panelInnerMargin
-  }
-});
 
 export default ContactInfo;

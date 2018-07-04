@@ -1,18 +1,7 @@
 import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { Text } from 'react-native-elements';
-
-//const LabeledTextInput = ({label, height = 40, viewContainerStyle, labelStyle, inputStyle, onChangeText, setRef, inputProps}) => (
-//    <View style={[styles.container, viewContainerStyle]}>
-//      <Text style={[styles.label, labelStyle]}>{label}</Text>
-//      <TextInput
-//          style={[styles.input, inputStyle]}
-//          height={height}
-//          onChangeText={(text) => onChangeText(text)}
-//          {...inputProps}
-//      />
-//    </View>
-//);
+import theme from '../../theme';
 
 class LabeledTextInput extends React.Component {
   render() {
@@ -33,7 +22,9 @@ class LabeledTextInput extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginBottom: theme.panelInnerMargin
+  },
   label: {
     fontSize: 20
   },

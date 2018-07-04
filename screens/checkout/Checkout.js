@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Header from '../cartAndChackout/Header';
-import Panel from '../cartAndChackout/Panel';
+import { ScreenTitle } from '../../components';
+import Panel from '../../components/Panel/Panel';
 import ContactInfo from '../cartAndChackout/ContactInfo';
 import BillingAddress from '../cartAndChackout/BillingAddress';
 import AccountAccess from '../cartAndChackout/AccountAccess';
@@ -12,23 +12,12 @@ class Checkout extends React.Component {
   render() {
     return (
         <View style={{flex: 1}}>
-          <Header title={'Checkout'}/>
-          
-          <Panel>
-            <ContactInfo/>
-          </Panel>
-          {/*<Panel>*/}
-            {/*<BillingAddress/>*/}
-          {/*</Panel>*/}
-          {/*<Panel>*/}
-            {/*<AccountAccess/>*/}
-          {/*</Panel>*/}
-          {/*<Panel>*/}
-            {/*<Payment/>*/}
-          {/*</Panel>*/}
-          {/*<Panel>*/}
-            {/*<TermsAndConditions/>*/}
-          {/*</Panel>*/}
+          <ScreenTitle title={'Checkout'}/>
+          <ContactInfo/>
+          <BillingAddress/>
+          <AccountAccess/>
+          <Payment/>
+          <TermsAndConditions/>
         </View>
     );
   }

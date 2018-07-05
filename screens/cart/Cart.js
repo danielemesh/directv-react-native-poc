@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { navigateToScreen } from '../../redux/actions/ui';
 import globals from '../../globals';
 import PricePerMonth from '../../components/PricePerMonth';
-import Header from '../cartAndChackout/Header';
-import Panel from '../cartAndChackout/Panel';
+import { ScreenTitle }from '../../components';
+import Panel from '../../components/Panel/Panel';
 import LabeledIcon from '../../components/common/LabeledIcon';
 
 class Cart extends React.Component {
@@ -25,7 +25,7 @@ class Cart extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <Header title={'My Cart'}/>
+          <ScreenTitle title={'My Cart'}/>
           
           <Panel>
             <View style={styles.summaryHeader}>

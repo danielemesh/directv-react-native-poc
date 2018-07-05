@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
 
-const Header = ({title}) => (
+const ScreenTitle = ({title}) => (
     <Text h1 style={styles.title}>{title}</Text>
 );
 
@@ -13,4 +13,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Header;
+export default ScreenTitle;

@@ -1,40 +1,41 @@
 import React from 'react';
-import { Picker, StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import theme from '../../theme';
-import LabeledTextInput from '../../components/common/LabeledTextInput';
-import LabeledIcon from '../../components/common/LabeledIcon';
+
 import { Divider, Text } from 'react-native-elements';
-import LabeledPrice from '../../components/common/LabeledPrice';
-import CreditCardExpirationDate from '../../components/common/CreditCardExpirationDate';
+import { LabeledTextInput, LabeledIcon, LabeledPrice, CreditCardExpirationDate, Panel, PanelHeader } from '../../components';
 
 class Payment extends React.Component {
   constructor(props) {
     super(props);
     
+    this.state = {
+      cardNumber: '',
+      expirationMonth: '',
+      expirationYear: '',
+      securityCode: '',
+      billingZipCode: '',
+      nameOnCard: ''
+    };
+    
     this.onChangeText = this.onChangeText.bind(this);
-    this.onChangeExpirationMonth = this.onChangeExpirationMonth.bind(this);
-    this.onChangeExpirationYear = this.onChangeExpirationYear.bind(this);
   }
   
-  onChangeText(text) {
-    console.log(text);
-  }
-  
-  onChangeExpirationMonth(month) {
-    console.log(month);
-  }
-  
-  onChangeExpirationYear(year) {
-    console.log(year);
+  onChangeText(text, key) {
+    this.setState({
+      [key]: text
+    });
   }
   
   render() {
     return (
-        <View style={styles.container}>
-          <LabeledIcon viewContainerStyle={styles.header}
-                       iconName="dollar"
-                       size={20}
-                       label="Due today"/>
+        <Panel>
+          <PanelHeader>
+            <LabeledIcon
+                iconName="dollar"
+                size={20}
+                label="Due today"/>
+          </PanelHeader>
           
           <LabeledPrice price={0}/>
           
@@ -52,67 +53,50 @@ class Payment extends React.Component {
           
           <LabeledTextInput
               label="Card number"
-              viewContainerStyle={styles.controlContainer}
               inputProps={{
                 textContentType: 'creditCardNumber',
                 keyboardType: 'numeric'
               }}
-              onChangeText={this.onChangeText}/>
+              onChangeText={text => this.onChangeText(text, 'cardNumber')}/>
           
           <CreditCardExpirationDate
-            labelStyle={{fontSize: theme.controlLabelFontSize}}
-            onChangeMonth={this.onChangeExpirationMonth}
-            onChangeYear={this.onChangeExpirationYear}
+              labelStyle={{fontSize: theme.controlLabelFontSize}}
+              onChangeMonth={value => this.onChangeText(value, 'expirationMonth')}
+              onChangeYear={value => this.onChangeText(value, 'expirationYear')}
           />
           
           <LabeledTextInput
               label="Security code"
-              viewContainerStyle={styles.controlContainer}
               inputProps={{
                 keyboardType: 'numeric',
                 maxLength: 3
               }}
-              onChangeText={this.onChangeText}/>
+              onChangeText={text => this.onChangeText(text, 'securityCode')}/>
           
           <LabeledTextInput
               label="Billing ZIP code"
-              viewContainerStyle={styles.controlContainer}
               inputProps={{
                 keyboardType: 'numeric'
               }}
-              onChangeText={this.onChangeText}/>
+              onChangeText={text => this.onChangeText(text, 'billingZipCode')}/>
           
           <LabeledTextInput
               label="Name on card"
-              viewContainerStyle={styles.controlContainer}
               inputProps={{
                 textContentType: 'name'
               }}
-              onChangeText={this.onChangeText}/>
+              onChangeText={text => this.onChangeText(text, 'nameOnCard')}/>
           
           <Text>
             By providing this information, you certify that you are the
             card owner or have authorization to charge on this card.
           </Text>
-        </View>
+        </Panel>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  header: {
-    marginBottom: 20
-  },
-  headerText: {
-    marginBottom: 30,
-    fontSize: 15
-  },
-  controlContainer: {
-    marginBottom: theme.panelInnerMargin
-  },
   divider: {
     marginVertical: theme.panelInnerMargin
   }

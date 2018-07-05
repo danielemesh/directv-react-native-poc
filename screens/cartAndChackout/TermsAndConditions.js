@@ -1,20 +1,20 @@
 import React from 'react';
-import theme from '../../theme';
-import { StyleSheet, View } from 'react-native';
-import LabeledIcon from '../../components/common/LabeledIcon';
+import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
-import ClearButton from '../../components/common/ClearButton';
-import ClearCheckbox from '../../components/common/ClearCheckbox';
+
+import { Panel, PanelHeader, LabeledIcon, ClearCheckbox } from '../../components';
+import theme from '../../theme';
 
 class TermsAndConditions extends React.Component {
   render() {
     return (
-        <View style={styles.container}>
-          <LabeledIcon
-              viewContainerStyle={styles.header}
-              iconName="check"
-              size={20}
-              label="Terms & Conditions"/>
+        <Panel>
+          <PanelHeader>
+            <LabeledIcon
+                iconName="check"
+                size={20}
+                label="Terms & Conditions"/>
+          </PanelHeader>
           
           <Text style={{marginBottom: theme.panelInnerMargin}}>
             Read the DIRECTV NOW Subscriber Details, the DIRECTV NOW Terms & Conditions, and the App Privacy Policy.
@@ -29,27 +29,14 @@ class TermsAndConditions extends React.Component {
               containerStyle={styles.controlContainer}
               onPress={() => console.log('terms!!!!')}
           />
-        </View>
+        </Panel>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  header: {
-    marginBottom: 20
-  },
-  headerText: {
-    marginBottom: 30,
-    fontSize: 15
-  },
   controlContainer: {
     marginBottom: theme.panelInnerMargin
-  },
-  divider: {
-    marginVertical: theme.panelInnerMargin
   }
 });
 

@@ -1,32 +1,51 @@
 import React from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
+import { Button, Text } from 'react-native-elements';
+
+import { LabeledTextInput, LabeledIcon, RadioButton, ClearButton, ClearCheckbox, Panel, PanelHeader } from '../../components';
 import theme from '../../theme';
-import LabeledTextInput from '../../components/common/LabeledTextInput';
-import LabeledIcon from '../../components/common/LabeledIcon';
-import { Button, CheckBox, Text } from 'react-native-elements';
-import RadioButton from '../../components/common/RadioButton';
-import ClearButton from '../../components/common/ClearButton';
-import ClearCheckbox from '../../components/common/ClearCheckbox';
 
 class AccountAccess extends React.Component {
   constructor(props) {
     super(props);
     
-    this.onChangeText = this.onChangeText.bind(this);
+    this.controls = {
+      accessId: React.createRef(),
+      password1: React.createRef(),
+      password2: React.createRef()
+    };
+    
+    this.state = {
+      accessId: '',
+      password1: '',
+      password2: '',
+      isCreateAccessId: true
+    };
+    
+    this.onChangeText     = this.onChangeText.bind(this);
+    this.focusNextControl = this.focusNextControl.bind(this);
   }
   
-  onChangeText(text) {
-    console.log(text);
+  focusNextControl(key) {
+    this.controls[key].focus();
+  }
+  
+  onChangeText(text, key) {
+    this.setState({
+      [key]: text
+    });
   }
   
   render() {
     return (
-        <View style={styles.container}>
-          <LabeledIcon viewContainerStyle={styles.header}
-                       iconType="materialicons"
-                       iconName="security"
-                       size={20}
-                       label="Account access"/>
+        <Panel>
+          <PanelHeader>
+            <LabeledIcon
+                iconType="materialicons"
+                iconName="security"
+                size={20}
+                label="Account access"/>
+          </PanelHeader>
           
           <Text style={styles.headerText}>
             Can't wait to stream? With an AT&T Access ID, you can start streaming as soon as you've placed your order!
@@ -37,37 +56,46 @@ class AccountAccess extends React.Component {
               containerStyle={styles.controlContainer}
               textStyle={styles.radioText}
               size={40}
-              checked={true}
+              checked={this.state.isCreateAccessId}
               onPress={() => console.log('create access id')}
           />
           
           <LabeledTextInput
               label="Access ID"
-              viewContainerStyle={styles.controlContainer}
-              onChangeText={this.onChangeText}/>
+              setRef={input => this.controls.accessId = input}
+              inputProps={{
+                blurOnSubmit: false,
+                returnKeyType: 'next',
+                onSubmitEditing: () => this.focusNextControl('password1')
+              }}
+              onChangeText={text => this.onChangeText(text, 'accessId')}/>
           
           <LabeledTextInput
               label="Password"
-              viewContainerStyle={styles.controlContainer}
+              setRef={input => this.controls.password1 = input}
               inputProps={{
                 textContentType: 'password',
-                secureTextEntry: true
+                secureTextEntry: true,
+                blurOnSubmit: false,
+                returnKeyType: 'next',
+                onSubmitEditing: () => this.focusNextControl('password2')
               }}
-              onChangeText={this.onChangeText}/>
+              onChangeText={text => this.onChangeText(text, 'password1')}/>
           
           <LabeledTextInput
               label="Re-enter password"
-              viewContainerStyle={styles.controlContainer}
+              setRef={input => this.controls.password2 = input}
               inputProps={{
                 textContentType: 'password',
-                secureTextEntry: true
+                secureTextEntry: true,
+                returnKeyType: 'done'
               }}
-              onChangeText={this.onChangeText}/>
+              onChangeText={text => this.onChangeText(text, 'password2')}/>
           
           <ClearButton
               title="Read the AT&T Access ID Terms of Service"
               containerViewStyle={styles.controlContainer}
-              onPress={() => Alert.alert('These are the terms of service')}/>
+              onPress={() => Alert.alert('Terms of Service', 'These are the terms of service')}/>
           
           <ClearCheckbox
               title="I have read and agree to the AT&T Access ID Terms of Service"
@@ -92,21 +120,15 @@ class AccountAccess extends React.Component {
               containerStyle={styles.controlContainer}
               textStyle={styles.radioText}
               size={40}
-              checked={false}
+              checked={!this.state.isCreateAccessId}
               onPress={() => console.log('already have access id')}
           />
-        </View>
+        </Panel>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  header: {
-    marginBottom: 20
-  },
   headerText: {
     marginBottom: 30,
     fontSize: 15

@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { ScreenTitle } from '../../components';
-import Panel from '../../components/Panel/Panel';
 import ContactInfo from '../cartAndChackout/ContactInfo';
 import BillingAddress from '../cartAndChackout/BillingAddress';
 import AccountAccess from '../cartAndChackout/AccountAccess';

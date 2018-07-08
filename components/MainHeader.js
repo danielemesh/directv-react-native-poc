@@ -5,6 +5,7 @@ import { Image } from 'react-native';
 
 export default MainHeader = () => (
     <Header
+        outerContainerStyles={{borderBottomWidth: 0}}
         innerContainerStyles={{alignItems: 'center'}}
         backgroundColor={theme.secondaryColor}
         centerComponent={<Image resizeMode="contain" source={require('../assets/images/logo.png')} style={{height: 50}} />}

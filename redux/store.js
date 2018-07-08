@@ -1,9 +1,10 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './reducers/root-reducer';
 import api from './middlewares/api';
 
-const storeEnhancers = compose(
+const storeEnhancers = composeWithDevTools(
     applyMiddleware(api)
 );
 

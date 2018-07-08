@@ -7,7 +7,7 @@ class CartAndCheckout extends React.Component {
   render() {
     return (
         <View style={{flex: 1, paddingBottom: 20}}>
-          {/*<Cart />*/}
+          <Cart />
           <Checkout />
         </View>
     );

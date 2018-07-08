@@ -5,10 +5,7 @@ const initialState = {
   basePlans: [],
   addons: [],
   cdvrs: [],
-  streamingDevices: [],
-  //selectedBasePlanId: '',
-  selectedCdvrId: '',
-  selectedStreamingDeviceId: ''
+  streamingDevices: []
 };
 
 // Base Plans Reducer

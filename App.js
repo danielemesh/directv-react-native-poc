@@ -1,26 +1,28 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { Provider } from 'react-redux';
+import { fetchProducts } from './redux/actions/products';
+import { navigateToScreen } from './redux/actions/ui';
+import store from './redux/store';
 
 import StickyFooter from './StickyFooter';
 import DirectvNow from './screens/DirectvNow/DirectvNow';
 import MainHeader from './components/MainHeader';
-import Cart from './screens/cart/Cart';
-import store from './redux/store';
-import { fetchProducts } from './redux/actions/products';
 import globals from './globals';
 import PageNotFound from './screens/404';
 import Loading from './screens/Loading';
-import Checkout from './screens/checkout/Checkout';
 import CartAndCheckout from './screens/cartAndChackout/CartAndCheckout';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     
+    this.scroll = React.createRef();
+    
     this.onStickyFooterCtaPress = this.onStickyFooterCtaPress.bind(this);
   }
+  
   state = {
     currentScreen: globals.screens.LOADING
   };
@@ -30,14 +32,17 @@ export default class App extends React.Component {
     
     store.subscribe(() => {
       this.setState({
-        //currentScreen: store.getState().ui.currentScreen
-        currentScreen: globals.screens.CART_AND_CHECKOUT
+        currentScreen: store.getState().ui.currentScreen
       });
     });
   }
   
+  componentDidUpdate() {
+    this.scroll.scrollTo({x: 0, y: 0, animated: false});
+  }
+  
   onStickyFooterCtaPress() {
-    console.log('CTA Clicked!!');
+    store.dispatch(navigateToScreen(globals.screens.CART_AND_CHECKOUT));
   }
   
   shouldComponentUpdate(nextProps, nextState) {
@@ -57,12 +62,6 @@ export default class App extends React.Component {
     else if (this.state.currentScreen === globals.screens.CART_AND_CHECKOUT) {
       mainContent = <CartAndCheckout/>;
     }
-    //else if (this.state.currentScreen === globals.screens.CART) {
-    //  mainContent = <Cart/>;
-    //}
-    //else if (this.state.currentScreen === globals.screens.CHECKOUT) {
-    //  mainContent = <Checkout/>;
-    //}
     else {
       mainContent = <PageNotFound/>;
     }
@@ -70,7 +69,7 @@ export default class App extends React.Component {
     return (
         <Provider store={store}>
           <View style={styles.container}>
-            <ScrollView>
+            <ScrollView ref={scroll => this.scroll = scroll}>
               <MainHeader/>
               <View style={styles.mainContentContainer}>
                 {mainContent}

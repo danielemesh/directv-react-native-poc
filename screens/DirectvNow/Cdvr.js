@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View, TouchableNativeFeedback } from 'react-native';
+import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Badge, CheckBox, Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -67,7 +67,7 @@ class Cdvr extends React.Component {
 
 const CdvrItem = ({cdvr, onSelect, checked}) => {
   return (
-      <TouchableNativeFeedback onPress={() => onSelect(cdvr)}>
+      <TouchableOpacity onPress={() => onSelect(cdvr)}>
         <View style={styles.streamOption}>
           <CheckBox
               title=""
@@ -97,7 +97,7 @@ const CdvrItem = ({cdvr, onSelect, checked}) => {
             <PricePerMonth price={cdvr.price} size={30}/>
           </View>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
   );
 };
 

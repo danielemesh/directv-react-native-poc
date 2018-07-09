@@ -6,11 +6,12 @@ import { ClearButton } from '../../components';
 import theme from '../../theme';
 
 export default DirectvHeader = () => {
-  const {width, height} = Dimensions.get('window');
+  const {width} = Dimensions.get('window');
+  
   return (
       <View>
         <ImageBackground
-            style={{width, alignItems: 'center', paddingTop: 70}}
+            style={[styles.bgImageContainer, {width}]}
             source={require('../../assets/images/header-bg.jpg')}
             resizeMode="cover">
           
@@ -50,7 +51,7 @@ export default DirectvHeader = () => {
           
           <Icon name="chevron-down" type="font-awesome" color="#fff" />
         
-          <Image source={require('../../assets/images/header-pic.png')} resizeMode="contain" style={[styles.teaserImage, {height: 300, width: width - (theme.mainContentPadding * 2)}]} />
+          <Image source={require('../../assets/images/header-pic.png')} resizeMode="contain" style={[styles.teaserImage, {width: width - (theme.mainContentPadding * 2)}]} />
         
         </ImageBackground>
       </View>
@@ -58,6 +59,12 @@ export default DirectvHeader = () => {
 };
 
 const styles = StyleSheet.create({
+  bgImageContainer: {
+    alignItems: 'center',
+    paddingTop: 70,
+    paddingBottom: 70,
+    marginBottom: 150
+  },
   text: {
     color: '#fff',
     textAlign: 'center'
@@ -85,5 +92,8 @@ const styles = StyleSheet.create({
     marginRight: 25
   },
   teaserImage: {
+    height: 200,
+    position: 'absolute',
+    bottom: -150,
   }
 });

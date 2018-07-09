@@ -1,5 +1,5 @@
 import React from 'react';
-import { Picker, StyleSheet, View } from 'react-native';
+import { Picker, StyleSheet, View, Platform } from 'react-native';
 import { Text } from 'react-native-elements';
 import { generateGuid } from '../../utils';
 import theme from '../../theme';
@@ -8,7 +8,8 @@ const LabeledPicker = ({label, items, viewContainerStyle, labelStyle, pickerStyl
     <View style={[styles.container, viewContainerStyle]}>
       <Text style={[styles.label, labelStyle]}>{label}</Text>
       <Picker
-          style={[styles.picker, pickerStyle]}
+          style={[styles.picker, Platform.OS === 'ios' ? {height: 100} : {}, pickerStyle]}
+          itemStyle={{height: 100, fontSize: 15}}
           selectedValue={selectedValue}
           onValueChange={onValueChange}>
         {items.map(item => (

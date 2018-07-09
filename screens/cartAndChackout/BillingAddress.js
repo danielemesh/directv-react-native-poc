@@ -111,7 +111,7 @@ class BillingAddress extends React.Component {
           <LabeledPicker
               label="State"
               setRef={input => this.controls.state = input}
-              pickerStyle={{height: 40}}
+              selectedValue={this.state.state}
               items={[
                 {label: 'Alabama', value: 'AL'},
                 {label: 'Alaska', value: 'AK'},

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Picker, View } from 'react-native';
+import { Picker, View, Platform } from 'react-native';
 import { Text } from 'react-native-elements';
 
 class CreditCardExpirationDate extends React.Component {
@@ -52,7 +52,8 @@ class CreditCardExpirationDate extends React.Component {
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
             <Picker
                 selectedValue={this.state.month}
-                style={{flex: 1}}
+                style={[{flex: 1}, Platform.OS === 'ios' ? {height: 100} : {}]}
+                itemStyle={{height: 100, fontSize: 15}}
                 onValueChange={this.onChangeMonth}>
               {this.months.map(month => (
                   <Picker.Item key={month.value} label={month.label} value={month.value}/>
@@ -60,7 +61,8 @@ class CreditCardExpirationDate extends React.Component {
             </Picker>
             
             <Picker
-                style={{flex: 1}}
+                style={[{flex: 1}, Platform.OS === 'ios' ? {height: 100} : {}]}
+                itemStyle={{height: 100, fontSize: 15}}
                 selectedValue={this.state.year}
                 onValueChange={this.onChangeYear}>
               {this.years.map(year => (
